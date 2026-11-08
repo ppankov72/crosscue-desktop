@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<style>
+  @page { margin: 2cm; }
+  body { font-family: 'DejaVu Sans', 'Arial', sans-serif; font-size: 11pt; line-height: 1.6; color: #1c1917; }
+  h1 { font-size: 18pt; color: #b45309; border-bottom: 2px solid #d97706; padding-bottom: 6px; page-break-after: avoid; }
+  h2 { font-size: 14pt; color: #92400e; margin-top: 20px; border-bottom: 1px solid #e7e5e4; padding-bottom: 3px; page-break-after: avoid; }
+  h3 { font-size: 12pt; color: #78716c; margin-top: 14px; page-break-after: avoid; }
+  p { margin: 6px 0; }
+  ul, ol { margin: 6px 0; padding-left: 20px; }
+  li { margin: 3px 0; }
+  blockquote { border-left: 3px solid #d97706; margin: 8px 0; padding: 4px 12px; background: #fef3c7; color: #78350f; }
+  code { background: #f5f5f4; padding: 1px 4px; border-radius: 3px; font-family: monospace; font-size: 10pt; }
+  strong { color: #1c1917; }
+  hr { border: none; border-top: 1px solid #e7e5e4; margin: 16px 0; }
+  .footer { margin-top: 30px; text-align: center; font-size: 9pt; color: #a8a29e; border-top: 1px solid #e7e5e4; padding-top: 8px; }
+</style>
+</head>
+<body>
+<h1>Инструкция за мигриране на портала в CMS</h1>
+
+<h2>Общ преглед</h2>
+
+<p>Създадената CMS система ви позволява да управлявате цялото съдържание на публичния портал — заглавна страница, навигация, футър, медия и глобални стилове — без да променяте код. Системата работи с работни версии (draft) и публикувани версии (published), с възможност за връщане към предишна версия (rollback).</p>
+
+<p><strong>Достъп:</strong> Влезте в приложението като администратор и отворете <strong><code>/admin/cms</code></strong> (от менюто в Control Room → CMS).</p>
+
+<hr>
+
+<h2>Стъпка 1: Миграция на съществуващото съдържание</h2>
+
+<p>При първо отваряне на CMS страницата ще видите съобщение <strong>„CMS Migration Required“</strong>.</p>
+
+<ul><li>Кликнете бутона <strong>„Migrate Content to CMS“</strong>.</li>
+<li>Системата автоматично ще:</li>
+<p></ul>   - Създаде записи за всички страници (Home, Privacy, Terms, Impressum, Contact) от съществуващите преводи.</p>
+<p>   - Пренесе всички редакции, направени през старата система (LandingContent), в новите CMS записи.</p>
+<p>   - Създаде настройки за навигация, футър и тема (глобални стилове).</p>
+<p>   - Публикува всичко веднага — сайтът продължава да работи без прекъсване.</p>
+<ul><li>След миграцията ще видите табовете: <strong>Pages | Navigation | Footer | Media | Global Styles</strong>.</li>
+<p></ul></p>
+<blockquote><strong>Важно:</strong> Миграцията е идемпотентна — ако я стартирате повторно, съществуващите записи няма да бъдат презаписани. Можете да я стартирате безопасно само веднъж.</blockquote>
+
+<hr>
+
+<h2>Стъпка 2: Редактиране на страници (Pages)</h2>
+
+<h3>Избор на страница</h3>
+<ul><li>В левия панел виждате списък с всички страници.</li>
+<li>Зелена точка = публикувана; жълта точка = има непубликувани промени в черновата.</li>
+<li>Кликнете страница, за да я редактирате.</li>
+<p></ul></p>
+<h3>Метаданни на страницата</h3>
+<ul><li><strong>Title</strong> — вътрешно име на страницата.</li>
+<li><strong>Slug</strong> — URL адрес (не се променя след създаване).</li>
+<li><strong>Display Order</strong> — подредба в списъка.</li>
+<li><strong>Nav visible</strong> — дали страницата да се показва в навигацията.</li>
+<li><strong>Footer visible</strong> — дали страницата да се показва във футъра.</li>
+<p></ul></p>
+<h3>Секции</h3>
+<p>Всяка страница е съставена от секции (Hero, Live Demo, Why, Features, Demo Tracks, Pricing, Downloads, Community, Docs и др.).</p>
+
+<p><strong>Операции със секции:</strong></p>
+<ul><li><strong>+ Add section</strong> — добавя нова секция от падащото меню.</li>
+<li><strong>Eye / EyeOff</strong> — показва/скрива секция (enabled/disabled).</li>
+<li><strong>↑ / ↓</strong> — премества секцията нагоре/надолу (променя подредбата на живата страница).</li>
+<li><strong>Copy</strong> — дублира секцията.</li>
+<li><strong>Trash</strong> — изтрива секцията.</li>
+<p></ul></p>
+<p><strong>Редактиране на елементи:</strong></p>
+<ul><li>Всеки текстов елемент (заглавие, подзаглавие, бутон и др.) има 4 полета — <strong>EN, DE, ES, BG</strong>.</li>
+<li>Въведете превода за всеки език. Ако поле е празно, системата използва английския (EN) като резервен.</li>
+<p></ul></p>
+<p><strong>Стилове на секцията:</strong></p>
+<ul><li>Разгънете <strong>„Section Styles“</strong> за да зададете:</li>
+<p></ul>  - <strong>Background</strong> — цвят на фона.</p>
+<p>  - <strong>Text Color</strong> — цвят на основния текст.</p>
+<p>  - <strong>Heading Color</strong> — цвят на заглавията.</p>
+
+<h3>Запазване и публикуване</h3>
+<ul><li><strong>Save Draft</strong> — запазва промените в черновата (не се отразява на живия сайт).</li>
+<li><strong>Publish</strong> — публикува черновата веднага (промените се появяват на живия сайт).</li>
+<li><strong>Rollback</strong> — връща към предишната публикувана версия.</li>
+<p></ul></p>
+<blockquote><strong>Важно:</strong> Промените в черновата НЕ се виждат от посетителите. Трябва да кликнете <strong>Publish</strong>, за да ги публикувате.</blockquote>
+
+<hr>
+
+<h2>Стъпка 3: Редактиране на навигацията (Navigation)</h2>
+
+<ul><li>Отидете на таб <strong>Navigation</strong>.</li>
+<li><strong>Brand Text</strong> — текстът на логото (по подразбиране „CROSSCUE“).</li>
+<li><strong>Logo URL</strong> — URL на изображение за лого (оставете празно за текстово лого).</li>
+<li><strong>Navigation Items</strong> — списък с линкове в навигацията:</li>
+<p></ul>   - Кликнете <strong>+ Add</strong> за нов елемент.</p>
+<p>   - За всеки елемент въведете:</p>
+<p>     - <strong>URL</strong> — адрес (напр. <code>#features</code>, <code>/studio</code>, <code>https://...</code>)</p>
+<p>     - <strong>Label</strong> — етикет за всеки език (EN, DE, ES, BG)</p>
+<p>     - <strong>Enabled</strong> — дали да се показва</p>
+<p>   - Използвайте кошчето за изтриване.</p>
+<ul><li><strong>Save Draft</strong> → <strong>Publish</strong> за да приложите промените.</li>
+<p></ul></p>
+<hr>
+
+<h2>Стъпка 4: Редактиране на футъра (Footer)</h2>
+
+<ul><li>Отидете на таб <strong>Footer</strong>.</li>
+<li><strong>Tagline, Subtitle, Rights</strong> — основни текстове на футъра (многоезични).</li>
+<li><strong>Columns</strong> — колони с линкове във футъра:</li>
+<p></ul>   - <strong>+ Add Column</strong> — добавя нова колона.</p>
+<p>   - За всяка колона въведете заглавие (многоезично) и линкове.</p>
+<p>   - Всеки линк има URL и многоезичен етикет.</p>
+<p>   - <strong>+ Add link</strong> — добавя линк към колоната.</p>
+<ul><li><strong>Legal Links</strong> — правни линкове (Privacy, Terms, Contact и др.):</li>
+<p></ul>   - Всеки има URL и многоезичен етикет.</p>
+<p>   - <strong>+ Add legal link</strong> — добавя нов.</p>
+<ul><li><strong>Save Draft</strong> → <strong>Publish</strong>.</li>
+<p></ul></p>
+<hr>
+
+<h2>Стъпка 5: Медийна библиотека (Media)</h2>
+
+<ul><li>Отидете на таб <strong>Media</strong>.</li>
+<li><strong>Upload</strong> — изберете изображение от компютъра си.</li>
+<p></ul>   - Изображението се качва и се създава запис в библиотеката.</p>
+<ul><li>За всяко изображение можете да редактирате:</li>
+<p></ul>   - <strong>Title</strong> — заглавие.</p>
+<p>   - <strong>Alt text</strong> — текст за достъпност (важно за SEO и достъпност).</p>
+<p>   - <strong>URL</strong> — копирайте този URL, за да го използвате в секции или стилове.</p>
+<ul><li><strong>Copy</strong> — копира URL адреса в клипборда.</li>
+<li><strong>Trash</strong> — изтрива изображението от библиотеката.</li>
+<p></ul></p>
+<blockquote><strong>Съвет:</strong> Използвайте URL адреса на изображението, за да зададете фонове или илюстрации в секциите на страниците.</blockquote>
+
+<hr>
+
+<h2>Стъпка 6: Глобални стилове (Global Styles / Theme)</h2>
+
+<ul><li>Отидете на таб <strong>Global Styles</strong>.</li>
+<li><strong>Colors</strong> — глобална цветова палитра:</li>
+<p></ul>   - <code>background</code> — фон на целия сайт</p>
+<p>   - <code>contentBg</code> — фон на картите/секциите</p>
+<p>   - <code>primary</code> — основен акцентен цвят (бутони, линкове)</p>
+<p>   - <code>secondary</code> — вторичен цвят</p>
+<p>   - <code>accent</code> — акцентен цвят</p>
+<p>   - <code>text</code> — цвят на основния текст</p>
+<p>   - <code>heading</code> — цвят на заглавията</p>
+<p>   - <code>muted</code> — цвят на вторичен/приглушен текст</p>
+<p>   - <code>border</code> — цвят на рамки</p>
+<ul><li><strong>Typography</strong> — типографски настройки за 5 роли:</li>
+<p></ul>   - <strong>Body</strong> — основен текст (семейство, размер, тегло, междуредие)</p>
+<p>   - <strong>Heading</strong> — заглавия (семейство, размер, тегло, междуредие, разстояние между букви, трансформация)</p>
+<p>   - <strong>Navigation</strong> — навигационен текст</p>
+<p>   - <strong>Button</strong> — текст на бутони</p>
+<p>   - <strong>Footer</strong> — текст във футъра</p>
+<ul><li><strong>Save Draft</strong> → <strong>Publish</strong> за да приложите стиловете глобално.</li>
+<p></ul></p>
+<hr>
+
+<h2>Стъпка 7: Многоезична поддръжка</h2>
+
+<p>Цялата CMS система поддържа 4 езика: <strong>English (EN), Deutsch (DE), Español (ES), Български (BG)</strong>.</p>
+
+<ul><li>Всеки текстов елемент има отделно поле за всеки език.</li>
+<li>Ако даден превод липсва, системата автоматично използва английския като резервен.</li>
+<li>Посетителите виждат съдържанието на езика, избран в браузъра им или чрез превключвателя на езици.</li>
+<p></ul></p>
+<hr>
+
+<h2>Стъпка 8: Workflow за публикуване</h2>
+
+<ul><li><strong>Редактирайте</strong> — правите промени в черновата (Save Draft).</li>
+<li><strong>Прегледайте</strong> — проверете всички промени в админ панела.</li>
+<li><strong>Публикувайте</strong> — кликнете Publish, за да ги пуснете на живо.</li>
+<li><strong>Върнете ако нужно</strong> — ако нещо не е наред, кликнете Rollback за предишната версия.</li>
+<p></ul></p>
+<blockquote><strong>Безопасност:</strong> Само администратори могат да редактират CMS. Обикновените потребители и посетителите виждат само публикуваното съдържание.</blockquote>
+
+<hr>
+
+<h2>Често задавани въпроси</h2>
+
+<p><strong>В: Може ли миграцията да се стартира повторно?</strong></p>
+<p>О: Да, тя е идемпотентна. Съществуващите записи няма да бъдат презаписани.</p>
+
+<p><strong>В: Какво се случва ако не публикувам?</strong></p>
+<p>О: Промените остават в черновата и не се виждат от посетителите.</p>
+
+<p><strong>В: Мога ли да върна промените?</strong></p>
+<p>О: Да, чрез бутона Rollback се връща към предишната публикувана версия.</p>
+
+<p><strong>В: Работи ли с мобилни устройства?</strong></p>
+<p>О: Да, административният панел е адаптивен, но за най-добро преживяване използвайте десктоп.</p>
+
+<p><strong>В: Влияе ли CMS на Studio (DJ приложението)?</strong></p>
+<p>О: Не, CMS управлява само публичния портал. Studio работи независимо.</p>
+
+<hr>
+
+<p><em>Документ създаден: септември 2026</em></p>
+
+<div class="footer">CrossCue CMS — Инструкция за миграция · Септември 2026</div>
+</body>
+</html>

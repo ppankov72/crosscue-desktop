@@ -1,0 +1,62 @@
+{
+  "name": "CampaignLesson",
+  "type": "object",
+  "properties": {
+    "campaign_id": {
+      "type": "string",
+      "description": "Reference to MarketingCampaign"
+    },
+    "what_worked": {
+      "type": "string"
+    },
+    "what_did_not_work": {
+      "type": "string"
+    },
+    "best_message": {
+      "type": "string"
+    },
+    "best_channel": {
+      "type": "string"
+    },
+    "best_market": {
+      "type": "string"
+    },
+    "unexpected_result": {
+      "type": "string"
+    },
+    "what_to_repeat": {
+      "type": "string"
+    },
+    "what_to_avoid": {
+      "type": "string"
+    },
+    "next_experiment": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "campaign_id"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

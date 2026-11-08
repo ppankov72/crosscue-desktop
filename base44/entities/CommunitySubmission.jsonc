@@ -1,0 +1,82 @@
+{
+  "name": "CommunitySubmission",
+  "type": "object",
+  "properties": {
+    "campaign_id": {
+      "type": "string",
+      "description": "Reference to MarketingCampaign (community type)"
+    },
+    "week_label": {
+      "type": "string",
+      "description": "Week identifier (e.g. 2026-W37)"
+    },
+    "participant_alias": {
+      "type": "string",
+      "description": "DJ name or alias of participant"
+    },
+    "external_post_url": {
+      "type": "string",
+      "description": "URL to the Facebook/community post"
+    },
+    "track_url": {
+      "type": "string",
+      "description": "URL to the track/song/sample"
+    },
+    "genre": {
+      "type": "string"
+    },
+    "platform": {
+      "type": "string",
+      "description": "Platform where submitted (facebook, soundcloud, etc.)"
+    },
+    "votes": {
+      "type": "number",
+      "default": 0
+    },
+    "reactions": {
+      "type": "string",
+      "description": "Manual reaction summary"
+    },
+    "is_winner": {
+      "type": "boolean",
+      "default": false
+    },
+    "voucher_id": {
+      "type": "string",
+      "description": "Reference to Voucher record if winner received reward"
+    },
+    "voucher_code": {
+      "type": "string",
+      "description": "Voucher code issued as reward"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "campaign_id",
+    "participant_alias"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

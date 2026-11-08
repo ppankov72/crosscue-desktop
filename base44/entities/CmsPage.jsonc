@@ -1,0 +1,106 @@
+{
+  "name": "CmsPage",
+  "type": "object",
+  "properties": {
+    "slug": {
+      "type": "string",
+      "description": "URL slug (e.g. '/', '/privacy', '/features')"
+    },
+    "title": {
+      "type": "string",
+      "description": "Internal page title"
+    },
+    "nav_label": {
+      "type": "string",
+      "description": "Navigation label as multilingual JSON"
+    },
+    "seo_title": {
+      "type": "string",
+      "description": "SEO title as multilingual JSON"
+    },
+    "seo_description": {
+      "type": "string",
+      "description": "SEO meta description as multilingual JSON"
+    },
+    "og_title": {
+      "type": "string"
+    },
+    "og_description": {
+      "type": "string"
+    },
+    "og_image": {
+      "type": "string"
+    },
+    "is_indexable": {
+      "type": "boolean",
+      "default": true
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "published"
+      ],
+      "default": "draft"
+    },
+    "nav_visible": {
+      "type": "boolean",
+      "default": false
+    },
+    "footer_visible": {
+      "type": "boolean",
+      "default": false
+    },
+    "display_order": {
+      "type": "number",
+      "default": 0
+    },
+    "draft_content": {
+      "type": "string",
+      "description": "JSON string: { sections: [{ id, type, enabled, order, elements: { key: { en, de, es, bg } }, styles: {} }] }"
+    },
+    "published_content": {
+      "type": "string",
+      "description": "JSON string of the published version"
+    },
+    "previous_published_content": {
+      "type": "string",
+      "description": "JSON string of the previous published version for rollback"
+    },
+    "published_at": {
+      "type": "string"
+    },
+    "modified_at": {
+      "type": "string"
+    },
+    "modified_by": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "slug",
+    "title"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

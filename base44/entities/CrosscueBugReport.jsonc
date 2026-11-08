@@ -1,0 +1,101 @@
+{
+  "name": "CrosscueBugReport",
+  "type": "object",
+  "properties": {
+    "reporter_user_id": {
+      "type": "string"
+    },
+    "reporter_email": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "player",
+        "mixer",
+        "library",
+        "playlist",
+        "midi",
+        "recording",
+        "portal",
+        "community",
+        "mobile",
+        "integration",
+        "other"
+      ],
+      "default": "other"
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "critical"
+      ],
+      "default": "medium"
+    },
+    "app_area": {
+      "type": "string"
+    },
+    "browser": {
+      "type": "string"
+    },
+    "os": {
+      "type": "string"
+    },
+    "device_type": {
+      "type": "string"
+    },
+    "route": {
+      "type": "string"
+    },
+    "reproduction_steps": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "new",
+        "confirmed",
+        "in_progress",
+        "resolved",
+        "closed",
+        "rejected"
+      ],
+      "default": "new"
+    },
+    "admin_notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "reporter_user_id",
+    "title",
+    "description"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": true,
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

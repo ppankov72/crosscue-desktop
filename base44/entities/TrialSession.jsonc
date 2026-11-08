@@ -1,0 +1,101 @@
+{
+  "name": "TrialSession",
+  "type": "object",
+  "properties": {
+    "trial_id": {
+      "type": "string"
+    },
+    "user_id": {
+      "type": "string"
+    },
+    "installation_id": {
+      "type": "string"
+    },
+    "session_started_at": {
+      "type": "string"
+    },
+    "session_stopped_at": {
+      "type": "string"
+    },
+    "last_heartbeat_at": {
+      "type": "string"
+    },
+    "accumulated_playback_seconds": {
+      "type": "number"
+    },
+    "playback_active": {
+      "type": "boolean"
+    },
+    "browser": {
+      "type": "string"
+    },
+    "browser_version": {
+      "type": "string"
+    },
+    "os": {
+      "type": "string"
+    },
+    "device_type": {
+      "type": "string"
+    },
+    "screen_width": {
+      "type": "number"
+    },
+    "screen_height": {
+      "type": "number"
+    },
+    "timezone": {
+      "type": "string"
+    },
+    "language": {
+      "type": "string"
+    },
+    "ip": {
+      "type": "string"
+    },
+    "country": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "user_agent": {
+      "type": "string"
+    },
+    "page": {
+      "type": "string"
+    },
+    "end_reason": {
+      "type": "string"
+    },
+    "shadow_enforcement_decision": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "trial_id",
+    "user_id"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

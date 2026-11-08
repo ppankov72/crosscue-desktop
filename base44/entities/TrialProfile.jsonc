@@ -1,0 +1,80 @@
+{
+  "name": "TrialProfile",
+  "type": "object",
+  "properties": {
+    "email": {
+      "type": "string",
+      "description": "Primary identity for the free trial (lowercased)"
+    },
+    "dj_nickname": {
+      "type": "string",
+      "description": "DJ display name submitted during onboarding"
+    },
+    "avatar_url": {
+      "type": "string",
+      "description": "Optional uploaded avatar/logo URL (image only)"
+    },
+    "trial_id": {
+      "type": "string",
+      "description": "Linked Trial record id"
+    },
+    "trial_token": {
+      "type": "string",
+      "description": "Opaque token stored client-side to identify the anonymous trial across sessions"
+    },
+    "installation_id": {
+      "type": "string"
+    },
+    "welcome_email_sent": {
+      "type": "boolean",
+      "default": false
+    },
+    "welcome_email_sent_at": {
+      "type": "string"
+    },
+    "feedback_score": {
+      "type": "number",
+      "description": "1-10 rating submitted after trial"
+    },
+    "feedback_use_again": {
+      "type": "string",
+      "enum": [
+        "yes",
+        "maybe",
+        "no"
+      ]
+    },
+    "feedback_comment": {
+      "type": "string"
+    },
+    "feedback_submitted_at": {
+      "type": "string"
+    },
+    "last_seen_at": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "email",
+    "dj_nickname",
+    "trial_token"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": true,
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -1,0 +1,203 @@
+{
+  "name": "MarketingCampaign",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Campaign display name"
+    },
+    "internal_code": {
+      "type": "string",
+      "description": "Unique internal campaign code used for attribution (e.g. WEEKEND01, FACEBOOKAI)"
+    },
+    "description": {
+      "type": "string"
+    },
+    "objective": {
+      "type": "string",
+      "enum": [
+        "awareness",
+        "traffic",
+        "registration",
+        "trial",
+        "weekend_pass",
+        "premium",
+        "community_engagement",
+        "retention",
+        "other"
+      ],
+      "default": "trial"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "idea",
+        "draft",
+        "scheduled",
+        "active",
+        "paused",
+        "finished",
+        "archived"
+      ],
+      "default": "idea"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "target_market": {
+      "type": "string",
+      "description": "Country or region (e.g. DE, BG, EU, US)"
+    },
+    "target_audience": {
+      "type": "string",
+      "description": "DJ persona segment (e.g. Beginner DJ, Bedroom DJ, Mobile DJ)"
+    },
+    "language": {
+      "type": "string",
+      "default": "en"
+    },
+    "currency": {
+      "type": "string",
+      "default": "EUR"
+    },
+    "channel": {
+      "type": "string",
+      "enum": [
+        "facebook",
+        "instagram",
+        "x",
+        "tiktok",
+        "youtube",
+        "google",
+        "reddit",
+        "email",
+        "community",
+        "referral",
+        "direct",
+        "partner",
+        "event",
+        "other"
+      ],
+      "default": "other"
+    },
+    "message": {
+      "type": "string",
+      "description": "Main headline / message"
+    },
+    "cta": {
+      "type": "string",
+      "description": "Call to action text"
+    },
+    "landing_destination": {
+      "type": "string",
+      "description": "Landing page URL or slug"
+    },
+    "campaign_code": {
+      "type": "string",
+      "description": "Attribution code (may match internal_code or be a variant)"
+    },
+    "budget": {
+      "type": "number",
+      "default": 0
+    },
+    "actual_spend": {
+      "type": "number",
+      "default": 0
+    },
+    "spend_currency": {
+      "type": "string",
+      "default": "EUR"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "target_visits": {
+      "type": "number",
+      "default": 0
+    },
+    "target_registrations": {
+      "type": "number",
+      "default": 0
+    },
+    "target_trials": {
+      "type": "number",
+      "default": 0
+    },
+    "target_paid": {
+      "type": "number",
+      "default": 0
+    },
+    "target_revenue": {
+      "type": "number",
+      "default": 0
+    },
+    "max_cac": {
+      "type": "number",
+      "default": 0
+    },
+    "target_roas": {
+      "type": "number",
+      "default": 0
+    },
+    "voucher_campaign_tag": {
+      "type": "string",
+      "description": "Links to Voucher.source_campaign for reward attribution"
+    },
+    "is_template": {
+      "type": "boolean",
+      "default": false
+    },
+    "parent_campaign_id": {
+      "type": "string",
+      "description": "For A/B variants \u2014 references parent campaign"
+    },
+    "variant_label": {
+      "type": "string",
+      "description": "A/B variant identifier (e.g. A, B)"
+    },
+    "content_headline": {
+      "type": "string"
+    },
+    "content_body": {
+      "type": "string"
+    },
+    "content_cta": {
+      "type": "string"
+    },
+    "asset_url": {
+      "type": "string",
+      "description": "CMS Media asset URL reference"
+    }
+  },
+  "required": [
+    "name",
+    "internal_code"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

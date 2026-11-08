@@ -1,0 +1,2 @@
+import { useState } from 'react';
+export default function SourcePanel({onYouTube}) { const [url,setUrl]=useState(''); const load=id=>{if(url.trim())onYouTube(id,url.trim())}; return <div className="flex items-center gap-2 text-xs"><span className="hidden text-[#a49778] xl:inline">PASTE YOUTUBE URL</span><input className="source-input" value={url} onChange={e=>setUrl(e.target.value)} placeholder="https://youtube.com/..."/><button className="mini-button" onClick={()=>load('A')}>LOAD A</button><button className="mini-button" onClick={()=>load('B')}>LOAD B</button></div> }

@@ -1,0 +1,102 @@
+{
+  "name": "Installation",
+  "type": "object",
+  "properties": {
+    "installation_id": {
+      "type": "string"
+    },
+    "first_user_id": {
+      "type": "string"
+    },
+    "first_seen_at": {
+      "type": "string"
+    },
+    "last_seen_at": {
+      "type": "string"
+    },
+    "browser_family": {
+      "type": "string"
+    },
+    "os_family": {
+      "type": "string"
+    },
+    "device_type": {
+      "type": "string"
+    },
+    "screen_class": {
+      "type": "string"
+    },
+    "timezone": {
+      "type": "string"
+    },
+    "language": {
+      "type": "string"
+    },
+    "environment_hash": {
+      "type": "string"
+    },
+    "first_ip": {
+      "type": "string"
+    },
+    "last_ip": {
+      "type": "string"
+    },
+    "first_country": {
+      "type": "string"
+    },
+    "last_country": {
+      "type": "string"
+    },
+    "trial_history_count": {
+      "type": "number",
+      "default": 0
+    },
+    "flagged": {
+      "type": "boolean",
+      "default": false
+    },
+    "risk_score": {
+      "type": "number",
+      "default": 0
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "revoked"
+      ],
+      "default": "active"
+    },
+    "revoked_at": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "installation_id"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

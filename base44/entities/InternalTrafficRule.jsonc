@@ -1,0 +1,95 @@
+{
+  "name": "InternalTrafficRule",
+  "type": "object",
+  "properties": {
+    "rule_type": {
+      "type": "string",
+      "enum": [
+        "user_id",
+        "role",
+        "ip",
+        "domain",
+        "environment",
+        "utm_source",
+        "user_agent",
+        "browser_identity",
+        "automated_pattern"
+      ]
+    },
+    "value": {
+      "type": "string"
+    },
+    "traffic_class": {
+      "type": "string",
+      "enum": [
+        "real",
+        "internal",
+        "test",
+        "bot"
+      ],
+      "default": "internal"
+    },
+    "enabled": {
+      "type": "boolean",
+      "default": true
+    },
+    "notes": {
+      "type": "string"
+    },
+    "is_system": {
+      "type": "boolean",
+      "default": false
+    },
+    "seed_key": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "rule_type",
+    "value",
+    "traffic_class"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "$and": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.is_system": false
+        }
+      ]
+    },
+    "update": {
+      "$and": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.is_system": false
+        }
+      ]
+    },
+    "delete": {
+      "$and": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.is_system": false
+        }
+      ]
+    }
+  }
+}

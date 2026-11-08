@@ -1,0 +1,16 @@
+import DeckSlider from './DeckSlider';
+import MonitoringControls from './MonitoringControls';
+import ChannelFader from './ChannelFader';
+import CrossfaderPrecision from './CrossfaderPrecision';
+import { RotateCcw } from 'lucide-react';
+import { Image } from '@/components/ui/image';
+import { formatEqDb } from '@/lib/decksmith/audioMath';
+
+function Channel({id,deck,onUpdate,pfl,onPfl}){
+const limited=deck.type!=='local';
+return <div className="flex min-w-0 flex-1 flex-col items-center gap-2"><b className="text-xs tracking-widest text-[#e8dec5]">CH {id}</b><div className="flex min-w-0 flex-col gap-1"><DeckSlider disabled={limited} label="HIGH" value={deck.high ?? 0} min={-26} max={6} step={.5} onChange={high=>onUpdate({high})} format={formatEqDb}/><DeckSlider disabled={limited} label="MID" value={deck.mid ?? 0} min={-26} max={6} step={.5} onChange={mid=>onUpdate({mid})} format={formatEqDb}/><DeckSlider disabled={limited} label="LOW" value={deck.low ?? 0} min={-26} max={6} step={.5} onChange={low=>onUpdate({low})} format={formatEqDb}/></div><button disabled={limited} onClick={onPfl} className={`mini-button ${pfl?'vinyl-active':''}`}>CUE / PFL</button><ChannelFader id={id} deck={deck} onChange={onUpdate}/></div>;
+}
+
+export default function Mixer({a,b,djIdentity,onA,onB,cross,onCross,autoDJ,onAutoDJ,autoDJWarning,shuffle,onToggleShuffle,onResetMix,pfl,onPfl,audio,onAudioUpdate}){
+ return <section data-mixer className="equipment-panel flex h-full min-h-[30rem] min-w-0 overflow-hidden flex-col"><div className="flex h-9 w-full items-center justify-center">{djIdentity?.djIdentityMode==='image'&&djIdentity?.djLogoUrl?<div className="h-8 max-w-full"><Image src={djIdentity.djLogoUrl} alt="DJ Logo" className="h-full w-full" fittingType="fit"/></div>:<h2 className="max-w-full truncate text-center text-sm font-bold tracking-[.18em] text-[#d5ad58]">{djIdentity?.djIdentityMode==='text'&&djIdentity?.djName?djIdentity.djName:(djIdentity?.mixerLogo||'DJ MIXER')}</h2>}</div><div className="mt-2 flex min-w-0 gap-2"><Channel id="A" deck={a} onUpdate={onA} pfl={pfl.A} onPfl={()=>onPfl('A')}/><div className="w-px shrink-0 bg-[#6d6045]"/><Channel id="B" deck={b} onUpdate={onB} pfl={pfl.B} onPfl={()=>onPfl('B')}/></div><div data-mixer-controls className="mt-auto border-t border-[#6d6045] pt-4"><CrossfaderPrecision position={cross} onChange={onCross} autoDJ={autoDJ}/><div className="mt-2 flex flex-wrap justify-center gap-2"><button className={`mini-button ${autoDJ?'vinyl-active':''}`} onClick={onAutoDJ}>AUTO DJ {autoDJ?'ON':'OFF'}</button><button className={`mini-button ${shuffle?'vinyl-active':''}`} onClick={onToggleShuffle}>SHUFFLE {shuffle?'ON':'OFF'}</button>{onResetMix&&<button className="mini-button" onClick={onResetMix} title="Reset Mix"><RotateCcw size={12}/> RESET MIX</button>}</div>{autoDJWarning&&<p role="status" className="mt-2 text-center text-xs text-amber-300">Auto DJ skipped: {autoDJWarning}</p>}<MonitoringControls audio={audio} onUpdate={onAudioUpdate}/></div></section>;
+}

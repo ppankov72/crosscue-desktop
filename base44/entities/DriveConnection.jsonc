@@ -1,0 +1,59 @@
+{
+  "name": "DriveConnection",
+  "type": "object",
+  "properties": {
+    "trial_token": {
+      "type": "string",
+      "description": "Anonymous trial token that owns this Drive connection (empty for authenticated-user connections)"
+    },
+    "user_id": {
+      "type": "string",
+      "description": "Authenticated CROSSCUE user ID that owns this Drive connection (empty for trial connections)"
+    },
+    "access_token": {
+      "type": "string",
+      "description": "Google Drive OAuth access token"
+    },
+    "refresh_token": {
+      "type": "string",
+      "description": "Google Drive OAuth refresh token (for automatic token renewal)"
+    },
+    "expires_at": {
+      "type": "string",
+      "description": "ISO timestamp when access_token expires"
+    },
+    "scope": {
+      "type": "string",
+      "description": "OAuth scopes granted"
+    },
+    "connected_email": {
+      "type": "string",
+      "description": "Google account email that was connected (display only \u2014 never used for CROSSCUE identity)"
+    }
+  },
+  "required": [
+    "access_token"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

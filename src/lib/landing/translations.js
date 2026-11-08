@@ -1,0 +1,290 @@
+import { FREE_TRIAL_LIMIT_SECONDS } from '@/lib/crosscue/trialConfig';
+import { translationsExtended } from './translationsExtended';
+const TRIAL_MINUTES = Math.round(FREE_TRIAL_LIMIT_SECONDS / 60);
+
+export const languages = [
+  { code: 'en', label: 'English',    name: 'English',    flag: '🇬🇧' },
+  { code: 'bg', label: 'Bulgarian',  name: 'Български',  flag: '🇧🇬' },
+  { code: 'de', label: 'German',     name: 'Deutsch',    flag: '🇩🇪' },
+  { code: 'it', label: 'Italian',    name: 'Italiano',   flag: '🇮🇹' },
+  { code: 'es', label: 'Spanish',    name: 'Español',     flag: '🇪🇸' },
+  { code: 'fr', label: 'French',     name: 'Français',    flag: '🇫🇷' },
+  { code: 'nl', label: 'Dutch',      name: 'Nederlands',  flag: '🇳🇱' },
+  { code: 'sr', label: 'Serbian',    name: 'Srpski',      flag: '🇷🇸' },
+  { code: 'ru', label: 'Russian',    name: 'Русский',     flag: '🇷🇺' },
+  { code: 'ro', label: 'Romanian',   name: 'Română',      flag: '🇷🇴' },
+  { code: 'tr', label: 'Turkish',    name: 'Türkçe',      flag: '🇹🇷' },
+  { code: 'el', label: 'Greek',      name: 'Ελληνικά',    flag: '🇬🇷' },
+];
+
+export const translations = {
+  en: {
+    nav: { demo: 'Demo', why: 'Why', features: 'Features', tracks: 'Tracks', pricing: 'Pricing', downloads: 'Downloads', community: 'Community', docs: 'Docs', launch: 'Launch' },
+    trial: {
+      onboarding: { welcome: 'Welcome to CROSSCUE', subtitle: 'Your 40-minute free Premium trial is ready. Free Core mixing is always unlimited.', email: 'Email', emailPlaceholder: 'you@example.com', djName: 'DJ Name / Nickname', djNamePlaceholder: 'e.g. DJ Nova', avatar: 'DJ Logo / Avatar', avatarOptional: '— optional', avatarPlaceholder: 'Upload an image (you can add it later)', startMixing: 'START MIXING FREE', explanation: 'Your trial unlocks 40 minutes of Premium features (recording, cloud streaming, advanced tools). Free local file mixing has no time limit and stays free forever.', hasAccount: 'Already have an account?', signIn: 'Sign in', errEmail: 'Please enter a valid email address', errNickname: 'Please enter a DJ name', errAvatar: 'Logo must be an image file', errAvatarSize: 'Logo must be under 4 MB', errAvatarUpload: 'Logo upload failed — you can continue without it', errGeneric: 'Failed to start trial' },
+      status: { freeSession: 'PREMIUM TRIAL', left: 'LEFT', warn10: '10 minutes remaining in your Premium trial. Free local mixing continues after expiry.', warn5: '5 minutes remaining in Premium trial. Enjoy the mix — your free local decks remain unlimited.' },
+      feedback: { title: 'How was your CROSSCUE session?', subtitle: "Your 40-minute Premium trial has ended. Your free local mixing is still active! We'd love your feedback.", rate: 'Rate your experience', poor: '1 = Poor', excellent: '10 = Excellent', wouldUseAgain: 'Would you use CROSSCUE again?', yes: 'YES', maybe: 'MAYBE', no: 'NO', comment: "Anything you'd like us to know?", commentOptional: '— optional', submit: 'SUBMIT FEEDBACK', thanksTitle: 'Thanks, DJ {nickname}! 🎧', thanksBody: 'Your feedback helps us build a better CROSSCUE.', continueMixing: 'Continue mixing free', weekendTitle: 'Continue for the Weekend', weekendDesc: '72 hours of playback', premiumTitle: 'Go Premium', premiumDesc: 'unlimited playback', portal: 'Go to Portal', errRating: 'Please pick a rating', errChoice: 'Please choose Yes / Maybe / No' },
+      expired: { title: 'Premium trial ended', body: 'Your 40-minute Premium trial has ended. Your free local file mixing, decks, playlists, and settings remain 100% free and unlimited.', weekendPass: 'Weekend Pass', weekendDesc: '72 hours full access', premium: 'Premium', premiumDesc: 'Monthly subscription, all features, offline mode', paymentsSoon: 'Payments coming soon.', close: 'Close' },
+      network: { title: 'Server connection required', body: 'The trial period requires an active connection to the CROSSCUE server.', retry: 'Try again', banner: 'Server connection lost — locking in {seconds}s' }
+    },
+    hero: { tagline: 'BE THE DJ. OWN THE PARTY.', subtitle: 'Your first DJ setup, right in your browser. Free DJ mixing with no time limit and no expensive controller needed. Try Premium features free for 40 minutes.', tryDemo: 'Try Demo', launch: 'Start Mixing Free' },
+    liveDemo: { title: 'Live Product Demo', subtitle: 'This is the real CROSSCUE — not a screenshot or video.', tagline: 'No installation. Load a track. Start mixing.', openFull: 'Open full screen' },
+    why: { title: 'Why CROSSCUE', subtitle: 'Built for DJs who want real control, not gimmicks.', points: [
+      { title: 'Offline First', desc: 'No internet required. Your music, your library, your mix — always available, even with no connection.' },
+      { title: 'Real DJ Control', desc: 'Dual turntables, vinyl mode, scratching, pitch, crossfader — the full experience, not a toy.' },
+      { title: 'Local Music Library', desc: 'Your collection stays yours. Playlists, metadata, instant search — all stored locally on your device.' },
+      { title: 'Auto DJ', desc: 'Let CROSSCUE mix for you with intelligent, beat-aware transitions and seamless crossfades.' },
+      { title: 'MIDI Control', desc: 'Connect any MIDI controller. Map every feature with learn mode for full hardware control.' },
+      { title: 'Browser & Beyond', desc: 'Runs in your browser today. Desktop builds for Windows, Linux, and macOS coming soon.' },
+    ]},
+    features: { title: 'Features', subtitle: 'Everything you need to mix, analyze, and perform.', categories: [
+      { title: 'Decks & Mixing', items: ['Dual turntables with vinyl control', 'Precision crossfader', 'Pitch control ±15%', 'Scratch with mouse/touch', 'Hot cues & loops', 'Replay mode'] },
+      { title: 'Library & Metadata', items: ['Local file library', 'ID3/Vorbis tag extraction', 'Custom playlists', 'Instant search & sort', 'BPM/Key columns', 'Drag & drop loading'] },
+      { title: 'Analysis', items: ['BPM detection with confidence', 'Musical key + Camelot notation', 'Multi-resolution waveforms', 'Acoustic fingerprinting', 'Silence trimming', 'Metadata store'] },
+      { title: 'Auto DJ', items: ['Automated crossfade transitions', 'Beat-aware mixing', 'Shuffle or playlist queue', 'Configurable transition timing', 'Manual override anytime', 'Continuous playback'] },
+      { title: 'FX', items: ['3-band EQ per channel', 'Adjustable filters', 'Echo & reverb', '4-beat loops', 'Sampler pads', 'Gain control', 'PFL monitoring'] },
+      { title: 'Recording & MIDI', items: ['Session recording', 'MIDI learn mode', 'Controller mapping', 'Multi-device support', 'Export recordings', 'Full transport control'] },
+    ]},
+    demoTracks: { title: 'Demo Tracks', subtitle: 'Original AI-generated demo tracks, provided for use with CROSSCUE. Load one and start mixing.', badge: 'AI-Generated · Demo Library', button: 'Mix These in CROSSCUE', play: 'Play', pause: 'Pause', loadA: 'Deck A', loadB: 'Deck B' },
+    pricing: { title: 'Pricing', subtitle: 'Simple plans. No stars, no fine print.', popular: 'POPULAR', plans: [
+      { name: 'Free Core', price: '€0', period: 'unlimited playback', desc: '100% free local DJ mixing in your browser. Dual realistic turntables, EQ, playlists & vinyl scratching. No installation, no time limit, no credit card required.', features: ['Unlimited local file mixing', 'Dual realistic turntables & crossfader', '3-band EQ, pitch & vinyl scratching', 'Local playlists & instant search', 'No time limit — mix anytime', '+ Optional 40-min Premium trial'], cta: 'Start Mixing Free' },
+      { name: 'Weekend Pass', price: '€4.99', period: '72 hours', desc: '72 hours of full Premium access. Perfect for a party, gig, or weekend.', features: ['Everything in Free Core, unlimited', 'Session recording & export', 'Google Drive streaming', 'All custom MIDI controller mappings', 'No subscription — single payment'], cta: 'Get Weekend Pass' },
+      { name: 'Premium', price: '€12.99', period: 'per month', desc: 'Ongoing professional access for working DJs and power users.', features: ['Full unlimited access', 'Unlimited recording & Google Drive', 'All custom MIDI mapping profiles', 'Desktop builds (Coming soon)', 'Priority support & early updates'], cta: 'Go Premium' },
+    ]},
+    downloads: { title: 'Downloads & Platforms', subtitle: 'Start in your browser today. Desktop builds on the way.', launchNow: 'Launch Now', comingSoon: 'Coming soon', platforms: [
+      { name: 'Web App', status: 'Available Now', desc: 'Launch instantly in your browser. No install needed.', version: 'v1.0.0', size: '', minOs: '' },
+      { name: 'Windows', status: 'Coming Soon', desc: 'Native desktop application.', version: '', size: '', minOs: 'Windows 10/11' },
+      { name: 'Linux', status: 'Coming Soon', desc: 'Native desktop application.', version: '', size: '', minOs: '' },
+      { name: 'macOS', status: 'Coming Soon', desc: 'Native desktop application.', version: '', size: '', minOs: '' },
+    ]},
+    community: { title: 'Community & Feedback', subtitle: 'Help shape the future of CROSSCUE.', feedTitle: 'Community Feed', feedSubtitle: 'Latest posts, comments, and feedback from the CROSSCUE community.', items: [
+      { title: 'Report a Bug', desc: 'Found something broken? Let us know and help improve CROSSCUE.', action: 'Report' },
+      { title: 'Suggest a Feature', desc: 'Have an idea? Submit it and vote on what matters most.', action: 'Suggest' },
+      { title: 'Facebook Community', desc: 'Follow CROSSCUE on Facebook for updates and discussions.', action: 'Visit' },
+      { title: 'Feature Voting', desc: 'Vote on upcoming features and shape the roadmap.', action: 'Vote' },
+    ]},
+    docs: { title: 'Docs & Help', subtitle: 'Everything you need to get the most out of CROSSCUE.', searchPlaceholder: 'Search documentation...', noResults: 'No results found.', docs: [
+      { title: 'Getting Started', desc: 'Load your first tracks and start mixing in minutes.' },
+      { title: 'Library & Metadata', desc: 'Organize, search, and manage your music collection.' },
+      { title: 'Auto DJ', desc: 'Let CROSSCUE mix for you with intelligent transitions.' },
+      { title: 'MIDI Setup', desc: 'Connect and map your hardware controller.' },
+      { title: 'Offline Mode', desc: 'Mix without internet — everything works locally.' },
+      { title: 'FAQ', desc: 'Answers to the most common questions.' },
+    ]},
+    status: { title: 'All Systems Operational', subtitle: 'Real-time status of CROSSCUE services.', viewFull: 'View full status page →', services: [
+      { name: 'Web App', status: 'Operational' },
+      { name: 'API', status: 'Operational' },
+      { name: 'Licensing', status: 'Operational' },
+      { name: 'Downloads', status: 'Operational' },
+    ]},
+    footer: { tagline: 'VINTAGE VIRTUAL TURNTABLES', subtitle: 'Mix. Analyze. Play. Offline or online.', rights: 'All rights reserved.', sections: [
+      { title: 'Product', links: ['Launch CROSSCUE', 'Live Demo', 'Pricing', 'Downloads'] },
+      { title: 'Resources', links: ['Docs & Help', 'Getting Started', 'MIDI Guide', 'FAQ'] },
+      { title: 'Community', links: ['Report a Bug', 'Feature Voting', 'Facebook'] },
+    ], legal: ['Privacy', 'Terms', 'Cookies', 'Licensing', 'Contact'] },
+    mobileHint: { tip: 'Tip:', text: 'Rotate your phone horizontally to see both decks at once, or mix directly using the compact control bar.', dismiss: 'Dismiss orientation tip' },
+  },
+
+  de: {
+    nav: { demo: 'Demo', why: 'Warum', features: 'Funktionen', tracks: 'Tracks', pricing: 'Preise', downloads: 'Downloads', community: 'Community', docs: 'Doku', launch: 'Starten' },
+    trial: {
+      onboarding: { welcome: 'Willkommen bei CROSSCUE', subtitle: 'Deine kostenlose 40-Minuten-Premium-Session steht bereit. Das Core-Mixen bleibt immer unbegrenzt.', email: 'E-Mail', emailPlaceholder: 'du@example.com', djName: 'DJ-Name / Spitzname', djNamePlaceholder: 'z.B. DJ Nova', avatar: 'DJ-Logo / Avatar', avatarOptional: '— optional', avatarPlaceholder: 'Bild hochladen (später möglich)', startMixing: 'KOSTENLOS MIXEN STARTEN', explanation: 'Deine Session schaltet 40 Minuten Premium-Features frei (Aufnahme, Cloud-Streaming, erweiterte Tools). Lokales Mixen hat kein Zeitlimit und bleibt dauerhaft kostenlos.', hasAccount: 'Bereits ein Konto?', signIn: 'Anmelden', errEmail: 'Bitte gib eine gültige E-Mail-Adresse ein', errNickname: 'Bitte gib einen DJ-Namen ein', errAvatar: 'Logo muss eine Bilddatei sein', errAvatarSize: 'Logo muss unter 4 MB sein', errAvatarUpload: 'Logo-Upload fehlgeschlagen — du kannst auch ohne fortfahren', errGeneric: 'Test konnte nicht gestartet werden' },
+      status: { freeSession: 'PREMIUM-TEST', left: 'ÜBRIG', warn10: 'Noch 10 Minuten im Premium-Test. Lokales Mixen läuft danach unbegrenzt weiter.', warn5: 'Noch 5 Minuten im Premium-Test. Genieße den Mix — deine lokalen Decks bleiben unbegrenzt.' },
+      feedback: { title: 'Wie war deine CROSSCUE-Session?', subtitle: 'Dein 40-Minuten-Premium-Test ist beendet. Dein kostenloses lokales Mixen läuft weiter! Wir freuen uns über dein Feedback.', rate: 'Bewerte deine Erfahrung', poor: '1 = Schlecht', excellent: '10 = Ausgezeichnet', wouldUseAgain: 'Würdest du CROSSCUE wieder nutzen?', yes: 'JA', maybe: 'VIELLEICHT', no: 'NEIN', comment: 'Möchtest du uns noch etwas mitteilen?', commentOptional: '— optional', submit: 'FEEDBACK ABGEBEN', thanksTitle: 'Danke, DJ {nickname}! 🎧', thanksBody: 'Dein Feedback hilft uns, ein besseres CROSSCUE zu bauen.', continueMixing: 'Kostenlos weitermixen', weekendTitle: 'Fürs Wochenende weitermachen', weekendDesc: '72 Stunden Wiedergabe', premiumTitle: 'Premium holen', premiumDesc: 'unbegrenzte Wiedergabe', portal: 'Zum Portal', errRating: 'Bitte wähle eine Bewertung', errChoice: 'Bitte wähle Ja / Vielleicht / Nein' },
+      expired: { title: 'Premium-Testzeitraum abgelaufen', body: 'Dein 40-minütiger Premium-Test ist beendet. Dein kostenloses lokales Mixen, Decks, Playlists und Einstellungen bleiben zu 100% kostenlos und unbegrenzt.', weekendPass: 'Wochenend-Pass', weekendDesc: '72 Stunden voller Zugriff', premium: 'Premium', premiumDesc: 'Monatliches Abo, alle Funktionen, Offline-Modus', paymentsSoon: 'Zahlungen bald verfügbar.', close: 'Schließen' },
+      network: { title: 'Serververbindung erforderlich', body: 'Der Testzeitraum erfordert eine aktive Verbindung zum CROSSCUE-Server.', retry: 'Erneut versuchen', banner: 'Serververbindung verloren — Sperre in {seconds}s' }
+    },
+    hero: { tagline: 'SEI DER DJ. MACH DIE PARTY!', subtitle: 'Dein erstes DJ-Pult direkt im Browser. Kostenlos mixen ohne Zeitlimit und ohne teuren Controller. Teste Premium-Funktionen 40 Minuten gratis.', tryDemo: 'Demo testen', launch: 'Kostenlos mixen starten' },
+    liveDemo: { title: 'Live Produkt-Demo', subtitle: 'Das ist das echte CROSSCUE — kein Screenshot oder Video.', tagline: 'Keine Installation. Lade einen Track. Starte das Mixen.', openFull: 'Vollbild öffnen' },
+    why: { title: 'Warum CROSSCUE', subtitle: 'Für DJs, die echte Kontrolle wollen, keine Spielereien.', points: [
+      { title: 'Offline-First', desc: 'Kein Internet nötig. Deine Musik, deine Bibliothek, dein Mix — immer verfügbar, auch ohne Verbindung.' },
+      { title: 'Echte DJ-Kontrolle', desc: 'Duale Plattenspieler, Vinyl-Modus, Scratchen, Pitch, Crossfader — das volle Erlebnis, kein Spielzeug.' },
+      { title: 'Lokale Musikbibliothek', desc: 'Deine Sammlung bleibt deine. Playlists, Metadaten, sofortige Suche — alles lokal auf deinem Gerät.' },
+      { title: 'Auto DJ', desc: 'Lass CROSSCUE für dich mixen mit intelligenten, beatbewussten Übergängen und nahtlosen Crossfades.' },
+      { title: 'MIDI-Kontrolle', desc: 'Verbinde jeden MIDI-Controller. Ordne jede Funktion im Learn-Modus zu für volle Hardware-Kontrolle.' },
+      { title: 'Browser & darüber hinaus', desc: 'Läuft heute im Browser. Desktop-Builds für Windows, Linux und macOS bald verfügbar.' },
+    ]},
+    features: { title: 'Funktionen', subtitle: 'Alles, was du zum Mixen, Analysieren und Performen brauchst.', categories: [
+      { title: 'Decks & Mixen', items: ['Duale Plattenspieler mit Vinyl-Steuerung', 'Präziser Crossfader', 'Pitch-Kontrolle ±15%', 'Scratchen mit Maus/Touch', 'Hot Cues & Loops', 'Replay-Modus'] },
+      { title: 'Bibliothek & Metadaten', items: ['Lokale Datei-Bibliothek', 'ID3/Vorbis-Tag-Extraktion', 'Eigene Playlists', 'Sofortige Suche & Sortierung', 'BPM/Tonart-Spalten', 'Drag & Drop Laden'] },
+      { title: 'Analyse', items: ['BPM-Erkennung mit Konfidenz', 'Musikalische Tonart + Camelot-Notation', 'Multi-Resolution-Waveforms', 'Akustisches Fingerprinting', 'Stille-Beschneidung', 'Metadaten-Speicher'] },
+      { title: 'Auto DJ', items: ['Automatische Crossfade-Übergänge', 'Beatbewusstes Mixen', 'Shuffle- oder Playlist-Warteschlange', 'Konfigurierbare Übergangszeiten', 'Manuelle Übersteuerung jederzeit', 'Kontinuierliche Wiedergabe'] },
+      { title: 'FX', items: ['3-Band-EQ pro Kanal', 'Einstellbare Filter', 'Echo & Reverb', '4-Beat-Loops', 'Sampler-Pads', 'Gain-Kontrolle', 'PFL-Monitoring'] },
+      { title: 'Aufnahme & MIDI', items: ['Session-Aufnahme', 'MIDI-Learn-Modus', 'Controller-Mapping', 'Multi-Geräte-Support', 'Aufnahmen exportieren', 'Volle Transport-Kontrolle'] },
+    ]},
+    demoTracks: { title: 'Demo-Tracks', subtitle: 'Originale KI-generierte Demo-Tracks, zur Nutzung mit CROSSCUE bereitgestellt. Lade einen und starte das Mixen.', badge: 'KI-generiert · Demo-Bibliothek', button: 'In CROSSCUE mixen', play: 'Abspielen', pause: 'Pause', loadA: 'Deck A', loadB: 'Deck B' },
+    pricing: { title: 'Preise', subtitle: 'Einfache Pläne. Keine Sterne, kein Kleingedrucktes.', popular: 'BELIEBT', plans: [
+      { name: 'Free Core', price: '€0', period: 'unbegrenzte Wiedergabe', desc: '100% kostenloses lokales DJ-Mixen im Browser. Duale Plattenspieler, EQ, Playlists & Vinyl-Scratching. Keine Installation, kein Zeitlimit, keine Kreditkarte.', features: ['Unbegrenztes lokales Datei-Mixen', 'Duale Plattenspieler & Crossfader', '3-Band EQ, Pitch & Vinyl-Scratching', 'Lokale Playlists & Sofortsuche', 'Kein Zeitlimit — jederzeit mixen', '+ Optional 40 Min. Premium-Test'], cta: 'Kostenlos mixen starten' },
+      { name: 'Wochenend-Pass', price: '€4.99', period: '72 Stunden', desc: '72 Stunden voller Premium-Zugriff. Perfekt für Party, Gig oder Wochenende.', features: ['Alles aus Free Core, unbegrenzt', 'Session-Aufnahme & Export', 'Google Drive Streaming', 'Alle individuellen MIDI-Mappings', 'Kein Abo — Einmalzahlung'], cta: 'Wochenend-Pass holen' },
+      { name: 'Premium', price: '€12.99', period: 'pro Monat', desc: 'Dauerhafter Profi-Zugriff für arbeitende DJs und Power-User.', features: ['Voller unbegrenzter Zugriff', 'Unbegrenzte Aufnahme & Google Drive', 'Alle individuellen MIDI-Mappings', 'Desktop-Builds (Bald verfügbar)', 'Priorisierter Support & Updates'], cta: 'Premium holen' },
+    ]},
+    downloads: { title: 'Downloads & Plattformen', subtitle: 'Starte heute im Browser. Desktop-Builds sind unterwegs.', launchNow: 'Jetzt starten', comingSoon: 'Bald verfügbar', platforms: [
+      { name: 'Web-App', status: 'Jetzt verfügbar', desc: 'Sofort im Browser starten. Keine Installation nötig.', version: 'v1.0.0', size: '', minOs: '' },
+      { name: 'Windows', status: 'Bald verfügbar', desc: 'Native Desktop-Anwendung.', version: '', size: '', minOs: 'Windows 10/11' },
+      { name: 'Linux', status: 'Bald verfügbar', desc: 'Native Desktop-Anwendung.', version: '', size: '', minOs: '' },
+      { name: 'macOS', status: 'Bald verfügbar', desc: 'Native Desktop-Anwendung.', version: '', size: '', minOs: '' },
+    ]},
+    community: { title: 'Community & Feedback', subtitle: 'Helfe mit, die Zukunft von CROSSCUE zu gestalten.', feedTitle: 'Community-Feed', feedSubtitle: 'Neueste Beiträge, Kommentare und Feedback aus der CROSSCUE-Community.', items: [
+      { title: 'Bug melden', desc: 'Etwas Kaputtes gefunden? Sag uns Bescheid und hilf CROSSCUE zu verbessern.', action: 'Melden' },
+      { title: 'Feature vorschlagen', desc: 'Eine Idee? Reiche sie ein und stimme über das Wichtigste ab.', action: 'Vorschlagen' },
+      { title: 'Facebook-Community', desc: 'Folge CROSSCUE auf Facebook für Updates und Diskussionen.', action: 'Besuchen' },
+      { title: 'Feature-Abstimmung', desc: 'Stimme über kommende Features ab und gestalte die Roadmap.', action: 'Abstimmen' },
+    ]},
+    docs: { title: 'Doku & Hilfe', subtitle: 'Alles, was du brauchst, um das Beste aus CROSSCUE herauszuholen.', searchPlaceholder: 'Dokumentation durchsuchen...', noResults: 'Keine Ergebnisse gefunden.', docs: [
+      { title: 'Erste Schritte', desc: 'Lade deine ersten Tracks und starte in Minuten mit dem Mixen.' },
+      { title: 'Bibliothek & Metadaten', desc: 'Organisiere, durchsuche und verwalte deine Musiksammlung.' },
+      { title: 'Auto DJ', desc: 'Lass CROSSCUE für dich mixen mit intelligenten Übergängen.' },
+      { title: 'MIDI-Setup', desc: 'Verbinde und konfiguriere deinen Hardware-Controller.' },
+      { title: 'Offline-Modus', desc: 'Ohne Internet mixen — alles funktioniert lokal.' },
+      { title: 'FAQ', desc: 'Antworten auf die häufigsten Fragen.' },
+    ]},
+    status: { title: 'Alle Systeme betriebsbereit', subtitle: 'Echtzeit-Status der CROSSCUE-Dienste.', viewFull: 'Vollständige Status-Seite →', services: [
+      { name: 'Web-App', status: 'Betriebsbereit' },
+      { name: 'API', status: 'Betriebsbereit' },
+      { name: 'Lizenzierung', status: 'Betriebsbereit' },
+      { name: 'Downloads', status: 'Betriebsbereit' },
+    ]},
+    footer: { tagline: 'Vintage virtuelle Plattenspieler', subtitle: 'Mixen. Analysieren. Abspielen. Offline oder online.', rights: 'Alle Rechte vorbehalten.', sections: [
+      { title: 'Produkt', links: ['CROSSCUE starten', 'Live-Demo', 'Preise', 'Downloads'] },
+      { title: 'Ressourcen', links: ['Doku & Hilfe', 'Erste Schritte', 'MIDI-Leitfaden', 'FAQ'] },
+      { title: 'Community', links: ['Bug melden', 'Feature-Abstimmung', 'Facebook'] },
+    ], legal: ['Datenschutz', 'AGB', 'Cookies', 'Lizenzierung', 'Kontakt'] },
+    mobileHint: { tip: 'Tipp:', text: 'Drehe dein Telefon quer, um beide Decks gleichzeitig zu sehen, oder mixe direkt über die kompakte Steuerleiste.', dismiss: 'Orientierungshinweis schließen' },
+  },
+
+  es: {
+    nav: { demo: 'Demo', why: 'Por qué', features: 'Funciones', tracks: 'Pistas', pricing: 'Precios', downloads: 'Descargas', community: 'Comunidad', docs: 'Docs', launch: 'Iniciar' },
+    trial: {
+      onboarding: { welcome: 'Bienvenido a CROSSCUE', subtitle: 'Tu prueba gratuita de 40 minutos de Premium está lista. La mezcla Core siempre es ilimitada.', email: 'Correo', emailPlaceholder: 'tu@example.com', djName: 'Nombre de DJ / Apodo', djNamePlaceholder: 'p.ej. DJ Nova', avatar: 'Logo de DJ / Avatar', avatarOptional: '— opcional', avatarPlaceholder: 'Sube una imagen (puedes añadirla después)', startMixing: 'EMPEZAR A MEZCLAR GRATIS', explanation: 'Tu sesión desbloquea 40 minutos de funciones Premium (grabación, streaming en la nube, herramientas avanzadas). La mezcla local no tiene límite de tiempo y nunca caduca.', hasAccount: '¿Ya tienes una cuenta?', signIn: 'Iniciar sesión', errEmail: 'Por favor introduce un correo válido', errNickname: 'Por favor introduce un nombre de DJ', errAvatar: 'El logo debe ser un archivo de imagen', errAvatarSize: 'El logo debe ser menor de 4 MB', errAvatarUpload: 'Error al subir el logo — puedes continuar sin él', errGeneric: 'No se pudo iniciar la prueba' },
+      status: { freeSession: 'PRUEBA PREMIUM', left: 'RESTANTE', warn10: 'Quedan 10 minutos de prueba Premium. La mezcla local continuará sin límite.', warn5: 'Quedan 5 minutos de prueba Premium. Disfruta la mezcla — tus platos locales son ilimitados.' },
+      feedback: { title: '¿Cómo fue tu sesión de CROSSCUE?', subtitle: 'Tu prueba Premium de 40 minutos ha terminado. ¡Tu mezcla local sigue activa! Nos encantaría tu feedback.', rate: 'Califica tu experiencia', poor: '1 = Malo', excellent: '10 = Excelente', wouldUseAgain: '¿Usarías CROSSCUE de nuevo?', yes: 'SÍ', maybe: 'QUIZÁS', no: 'NO', comment: '¿Quieres contarnos algo más?', commentOptional: '— opcional', submit: 'ENVIAR FEEDBACK', thanksTitle: '¡Gracias, DJ {nickname}! 🎧', thanksBody: 'Tu feedback nos ayuda a mejorar CROSSCUE.', continueMixing: 'Continuar mezclando gratis', weekendTitle: 'Continuar por el Fin de Semana', weekendDesc: '72 horas de reproducción', premiumTitle: 'Pasarse a Premium', premiumDesc: 'reproducción ilimitada', portal: 'Ir al Portal', errRating: 'Por favor elige una calificación', errChoice: 'Por favor elige Sí / Quizás / No' },
+      expired: { title: 'Período de prueba Premium terminado', body: 'Tu prueba Premium de 40 minutos ha finalizado. Tu mezcla local gratuita, pletinas, listas y ajustes siguen siendo 100% gratuitos e ilimitados.', weekendPass: 'Pase de Fin de Semana', weekendDesc: '72 horas de acceso completo', premium: 'Premium', premiumDesc: 'Suscripción mensual, todas las funciones, modo sin conexión', paymentsSoon: 'Pagos próximamente.', close: 'Cerrar' },
+      network: { title: 'Se requiere conexión al servidor', body: 'El período de prueba requiere una conexión activa al servidor de CROSSCUE.', retry: 'Reintentar', banner: 'Conexión perdida — bloqueo en {seconds}s' }
+    },
+    hero: { tagline: 'SÉ EL DJ. DOMINA LA FIESTA.', subtitle: 'Tu primera cabina de DJ en el navegador. Mezcla gratis sin límite de tiempo y sin controlador caro. Prueba las funciones Premium 40 minutos gratis.', tryDemo: 'Probar Demo', launch: 'Empezar a mezclar gratis' },
+    liveDemo: { title: 'Demo del Producto en Vivo', subtitle: 'Este es el verdadero CROSSCUE — no una captura ni un video.', tagline: 'Sin instalación. Carga una pista. Empieza a mezclar.', openFull: 'Abrir pantalla completa' },
+    why: { title: 'Por qué CROSSCUE', subtitle: 'Para DJs que quieren control real, no trucos.', points: [
+      { title: 'Sin Conexión Primero', desc: 'No se necesita internet. Tu música, tu biblioteca, tu mezcla — siempre disponible, incluso sin conexión.' },
+      { title: 'Control DJ Real', desc: 'Tornamesas duales, modo vinilo, scratch, pitch, crossfader — la experiencia completa, no un juguete.' },
+      { title: 'Biblioteca Local', desc: 'Tu colección sigue siendo tuya. Listas, metadatos, búsqueda instantánea — todo almacenado localmente.' },
+      { title: 'Auto DJ', desc: 'Deja que CROSSCUE mezcle por ti con transiciones inteligentes y conscientes del beat.' },
+      { title: 'Control MIDI', desc: 'Conecta cualquier controlador MIDI. Mapea cada función con modo learn para control total de hardware.' },
+      { title: 'Navegador y Más Allá', desc: 'Funciona en tu navegador hoy. Versiones de escritorio para Windows, Linux y macOS próximamente.' },
+    ]},
+    features: { title: 'Funciones', subtitle: 'Todo lo que necesitas para mezclar, analizar y actuar.', categories: [
+      { title: 'Decks y Mezcla', items: ['Tornamesas duales con control de vinilo', 'Crossfader de precisión', 'Control de pitch ±15%', 'Scratch con ratón/táctil', 'Hot cues y loops', 'Modo replay'] },
+      { title: 'Biblioteca y Metadatos', items: ['Biblioteca de archivos local', 'Extracción de etiquetas ID3/Vorbis', 'Listas personalizadas', 'Búsqueda y orden instantáneo', 'Columnas BPM/Tono', 'Carga con arrastrar y soltar'] },
+      { title: 'Análisis', items: ['Detección de BPM con confianza', 'Tono musical + notación Camelot', 'Waveforms multi-resolución', 'Huella acústica', 'Recorte de silencio', 'Almacén de metadatos'] },
+      { title: 'Auto DJ', items: ['Transiciones de crossfade automáticas', 'Mezcla consciente del beat', 'Cola aleatoria o de lista', 'Tiempos de transición configurables', 'Anulación manual en cualquier momento', 'Reproducción continua'] },
+      { title: 'FX', items: ['EQ de 3 bandas por canal', 'Filtros ajustables', 'Eco y reverb', 'Loops de 4 beats', 'Pads de sampler', 'Control de gain', 'Monitorización PFL'] },
+      { title: 'Grabación y MIDI', items: ['Grabación de sesión', 'Modo MIDI learn', 'Mapeo de controlador', 'Soporte multi-dispositivo', 'Exportar grabaciones', 'Control de transporte completo'] },
+    ]},
+    demoTracks: { title: 'Pistas de Demo', subtitle: 'Pistas de demo originales generadas por IA, proporcionadas para su uso con CROSSCUE. Carga una y empieza a mezclar.', badge: 'Generadas por IA · Biblioteca Demo', button: 'Mezclar en CROSSCUE', play: 'Reproducir', pause: 'Pausa', loadA: 'Deck A', loadB: 'Deck B' },
+    pricing: { title: 'Precios', subtitle: 'Planes simples. Sin estrellas, sin letra pequeña.', popular: 'POPULAR', plans: [
+      { name: 'Free Core', price: '€0', period: 'reproducción ilimitada', desc: 'Mezcla de DJ local 100% gratuita en tu navegador. Platos duales, EQ, listas y scratch de vinilo. Sin instalación, sin límite de tiempo y sin tarjeta.', features: ['Mezcla ilimitada de archivos locales', 'Platos duales y crossfader de precisión', 'EQ de 3 bandas, pitch y scratch', 'Listas locales y búsqueda instantánea', 'Sin límite de tiempo — mezcla siempre', '+ Prueba Premium opcional de 40 min'], cta: 'Empezar a mezclar gratis' },
+      { name: 'Pase de Fin de Semana', price: '€4.99', period: '72 horas', desc: '72 horas de acceso Premium completo. Perfecto para fiestas, eventos o el fin de semana.', features: ['Todo lo de Free Core, ilimitado', 'Grabación de sesiones y exportación', 'Streaming de Google Drive', 'Todos los mapeos MIDI personalizados', 'Sin suscripción — pago único'], cta: 'Obtener Pase de Fin de Semana' },
+      { name: 'Premium', price: '€12.99', period: 'por mes', desc: 'Acceso profesional continuo para DJs y usuarios avanzados.', features: ['Acceso total ilimitado', 'Grabación ilimitada y Google Drive', 'Todos los perfiles de mapeo MIDI', 'Versiones de escritorio (Próximamente)', 'Soporte prioritario y novedades'], cta: 'Pasar a Premium' },
+    ]},
+    downloads: { title: 'Descargas y Plataformas', subtitle: 'Empieza en tu navegador hoy. Versiones de escritorio en camino.', launchNow: 'Iniciar Ahora', comingSoon: 'Próximamente', platforms: [
+      { name: 'App Web', status: 'Disponible Ahora', desc: 'Inicia al instante en tu navegador. Sin instalación.', version: 'v1.0.0', size: '', minOs: '' },
+      { name: 'Windows', status: 'Próximamente', desc: 'Aplicación de escritorio nativa.', version: '', size: '', minOs: 'Windows 10/11' },
+      { name: 'Linux', status: 'Próximamente', desc: 'Aplicación de escritorio nativa.', version: '', size: '', minOs: '' },
+      { name: 'macOS', status: 'Próximamente', desc: 'Aplicación de escritorio nativa.', version: '', size: '', minOs: '' },
+    ]},
+    community: { title: 'Comunidad y Comentarios', subtitle: 'Ayuda a dar forma al futuro de CROSSCUE.', feedTitle: 'Feed de la Comunidad', feedSubtitle: 'Últimas publicaciones, comentarios y comentarios de la comunidad CROSSCUE.', items: [
+      { title: 'Reportar un Bug', desc: '¿Encontraste algo roto? Avísanos y ayuda a mejorar CROSSCUE.', action: 'Reportar' },
+      { title: 'Sugerir una Función', desc: '¿Tienes una idea? Envíala y vota lo que más importa.', action: 'Sugerir' },
+      { title: 'Comunidad de Facebook', desc: 'Sigue a CROSSCUE en Facebook para actualizaciones y discusiones.', action: 'Visitar' },
+      { title: 'Votación de Funciones', desc: 'Vota las próximas funciones y da forma a la hoja de ruta.', action: 'Votar' },
+    ]},
+    docs: { title: 'Docs y Ayuda', subtitle: 'Todo lo que necesitas para sacar lo máximo de CROSSCUE.', searchPlaceholder: 'Buscar en documentación...', noResults: 'No se encontraron resultados.', docs: [
+      { title: 'Primeros Pasos', desc: 'Carga tus primeras pistas y empieza a mezclar en minutos.' },
+      { title: 'Biblioteca y Metadatos', desc: 'Organiza, busca y gestiona tu colección de música.' },
+      { title: 'Auto DJ', desc: 'Deja que CROSSCUE mezcle por ti con transiciones inteligentes.' },
+      { title: 'Configuración MIDI', desc: 'Conecta y configura tu controlador hardware.' },
+      { title: 'Modo Sin Conexión', desc: 'Mezcla sin internet — todo funciona localmente.' },
+      { title: 'FAQ', desc: 'Respuestas a las preguntas más comunes.' },
+    ]},
+    status: { title: 'Todos los Sistemas Operativos', subtitle: 'Estado en tiempo real de los servicios de CROSSCUE.', viewFull: 'Ver página de estado completa →', services: [
+      { name: 'App Web', status: 'Operativo' },
+      { name: 'API', status: 'Operativo' },
+      { name: 'Licencias', status: 'Operativo' },
+      { name: 'Descargas', status: 'Operativo' },
+    ]},
+    footer: { tagline: 'Tornamesas Virtuales Vintage', subtitle: 'Mezcla. Analiza. Reproduce. Sin conexión o en línea.', rights: 'Todos los derechos reservados.', sections: [
+      { title: 'Producto', links: ['Iniciar CROSSCUE', 'Demo en Vivo', 'Precios', 'Descargas'] },
+      { title: 'Recursos', links: ['Docs y Ayuda', 'Primeros Pasos', 'Guía MIDI', 'FAQ'] },
+      { title: 'Comunidad', links: ['Reportar un Bug', 'Votación de Funciones', 'Facebook'] },
+    ], legal: ['Privacidad', 'Términos', 'Cookies', 'Licencias', 'Contacto'] },
+    mobileHint: { tip: 'Consejo:', text: 'Gira tu teléfono horizontalmente para ver ambos decks a la vez, o mezcla directamente usando la barra de control compacta.', dismiss: 'Cerrar consejo de orientación' },
+  },
+
+  bg: {
+    nav: { demo: 'Демо', why: 'Защо', features: 'Функции', tracks: 'Песни', pricing: 'Цени', downloads: 'Изтегляния', community: 'Общност', docs: 'Документи', launch: 'Старт' },
+    trial: {
+      onboarding: { welcome: 'Добре дошли в CROSSCUE', subtitle: 'Вашият 40-минутен безплатен Premium тест е готов. Основното Free Core миксиране остава неограничено.', email: 'Имейл', emailPlaceholder: 'ti@example.com', djName: 'DJ име / Прозвище', djNamePlaceholder: 'напр. DJ Nova', avatar: 'DJ лого / Аватар', avatarOptional: '— по избор', avatarPlaceholder: 'Качи изображение (можеш и по-късно)', startMixing: 'ЗАПОЧНИ ДА МИКСИРАШ БЕЗПЛАТНО', explanation: 'Пробната сесия отключва 40 минути Premium екстри (запис, облачен стрийминг, разширени инструменти). Основното локално миксиране няма времеви лимит и остава винаги безплатно.', hasAccount: 'Вече имате акаунт?', signIn: 'Вход', errEmail: 'Моля, въведете валиден имейл', errNickname: 'Моля, въведете DJ име', errAvatar: 'Логото трябва да е изображение', errAvatarSize: 'Логото трябва да е под 4 MB', errAvatarUpload: 'Качването на логото неуспешно — можете да продължите без него', errGeneric: 'Неуспешно стартиране на пробния период' },
+      status: { freeSession: 'PREMIUM ТЕСТ', left: 'ОСТАВАТ', warn10: 'Остават 10 минути в Premium теста. Локалното миксиране продължава неограничено и след това.', warn5: 'Остават 5 минути в Premium теста. Насладете се на микса — вашите локални декове остават неограничени.' },
+      feedback: { title: 'Как беше вашата CROSSCUE сесия?', subtitle: 'Вашият 40-минутен Premium тест приключи. Локалното безплатно миксиране все още е активно! Ще се радваме на обратна връзка.', rate: 'Оценете вашето изживяване', poor: '1 = Лошо', excellent: '10 = Отлично', wouldUseAgain: 'Бихте ли използвали CROSSCUE отново?', yes: 'ДА', maybe: 'МОЖЕ БИ', no: 'НЕ', comment: 'Искате ли да ни кажете нещо още?', commentOptional: '— по избор', submit: 'ИЗПРАТИ ОБРАТНА ВРЪЗКА', thanksTitle: 'Благодаря, DJ {nickname}! 🎧', thanksBody: 'Вашата обратна връзка ни помага да изградим по-добро CROSSCUE.', continueMixing: 'Продължи безплатно миксиране', weekendTitle: 'Продължи за уикенда', weekendDesc: '72 часа възпроизвеждане', premiumTitle: 'Премини на Premium', premiumDesc: 'неограничено възпроизвеждане', portal: 'Към портала', errRating: 'Моля, изберете оценка', errChoice: 'Моля, изберете Да / Може би / Не' },
+      expired: { title: 'Premium тестът приключи', body: 'Вашият 40-минутен Premium тест приключи. Вашето безплатно локално миксиране, декове, плейлисти и настройки остават 100% безплатни и неограничени.', weekendPass: 'Уикенд пропуск', weekendDesc: '72 часа пълен достъп', premium: 'Premium', premiumDesc: 'Месечен абонамент, всички функции, офлайн режим', paymentsSoon: 'Плащанията скоро ще са достъпни.', close: 'Затвори' },
+      network: { title: 'Изисква се връзка със сървъра', body: 'Пробният период изисква активна връзка със CROSSCUE сървъра.', retry: 'Опитай отново', banner: 'Връзката със сървъра е загубена — заключване след {seconds}s' }
+    },
+    hero: { tagline: 'БЪДИ ДИДЖЕЯТ. НАПРАВИ ПАРТИТО!', subtitle: 'Твоят първи DJ пулт директно в браузъра. Безплатно DJ миксиране без времеви лимит и без скъп контролер. Тествай Premium екстрите безплатно за 40 минути.', tryDemo: 'Тествай Демо', launch: 'Започни безплатно' },
+    liveDemo: { title: 'Демо на живо', subtitle: 'Това е истинският CROSSCUE — не снимка или видео.', tagline: 'Без инсталация. Зареди песен. Започни да миксираш.', openFull: 'Отвори на цял екран' },
+    why: { title: 'Защо CROSSCUE', subtitle: 'За диджеи, които искат истински контрол, не трикове.', points: [
+      { title: 'Офлайн на първо място', desc: 'Не се изисква интернет. Твоята музика, твоята библиотека, твоят микс — винаги налични, дори без връзка.' },
+      { title: 'Истински DJ контрол', desc: 'Двойни плочи, винилов режим, скреч, питч, кросфейдър — пълното изживяване, не играчка.' },
+      { title: 'Локална музикална библиотека', desc: 'Колекцията ти остава твоя. Плейлисти, метаданни, незабавно търсене — всичко локално на устройството.' },
+      { title: 'Авто DJ', desc: 'Остави CROSSCUE да миксира вместо теб с интелигентни преходи в такт и плавни кросфейдъри.' },
+      { title: 'MIDI контрол', desc: 'Свържи всеки MIDI контролер. Мапвай всяка функция в learn режим за пълен хардуерен контрол.' },
+      { title: 'Браузър и отвъд', desc: 'Работи в браузъра днес. Десктоп версии за Windows, Linux и macOS се подготвят.' },
+    ]},
+    features: { title: 'Функции', subtitle: 'Всичко, което ти трябва за миксиране, анализ и изпълнение.', categories: [
+      { title: 'Плочи и миксиране', items: ['Двойни плочи с винилов контрол', 'Прецизен кросфейдър', 'Контрол на питча ±15%', 'Скреч с мишка/докосване', 'Hot cues и лупове', 'Replay режим'] },
+      { title: 'Библиотека и метаданни', items: ['Локална файлова библиотека', 'Извличане на ID3/Vorbis тагове', 'Персонализирани плейлисти', 'Незабавно търсене и сортиране', 'Колони BPM/тоналност', 'Зареждане с drag & drop'] },
+      { title: 'Анализ', items: ['Откриване на BPM с достоверност', 'Музикална тоналност + Camelot нотация', 'Мулти-резолюционни вълни', 'Акустичен пръстов отпечатък', 'Отрязване на тишина', 'Хранилище за метаданни'] },
+      { title: 'Авто DJ', items: ['Автоматични кросфейдър преходи', 'Миксиране в такт', 'Опашка в разбъркан ред или плейлист', 'Конфигурируемо време за преход', 'Ръчно прехвърляне по всяко време', 'Непрекъснато възпроизвеждане'] },
+      { title: 'FX', items: ['3-лентов EQ на канал', 'Настройваеми филтри', 'Ехо и реверб', '4-тактови лупове', 'Семплер пада', 'Контрол на gain', 'PFL мониторинг'] },
+      { title: 'Запис и MIDI', items: ['Запис на сесия', 'MIDI learn режим', 'Мапинг на контролер', 'Поддръжка на множество устройства', 'Експорт на записи', 'Пълен транспортен контрол'] },
+    ]},
+    demoTracks: { title: 'Демо песни', subtitle: 'Оригинални AI-генерирани демо песни, предоставени за използване с CROSSCUE. Зареди една и започни да миксираш.', badge: 'AI-Генерирани · Демо библиотека', button: 'Миксирай в CROSSCUE', play: 'Пусни', pause: 'Пауза', loadA: 'Дек A', loadB: 'Дек B' },
+    pricing: { title: 'Цени', subtitle: 'Прости планове. Без звезди, без ситен шрифт.', popular: 'ПОПУЛЯРЕН', plans: [
+      { name: 'Free Core', price: '€0', period: 'неограничено възпроизвеждане', desc: '100% безплатно локално DJ миксиране в браузъра. Двойни плочи, EQ, плейлисти и винилов скреч. Без инсталация, без ограничение във времето и без карта.', features: ['Неограничено локално миксиране на файлове', 'Двойни автентични плочи и кросфейдър', '3-лентов EQ, питч и винилов скреч', 'Локални плейлисти и бързо търсене', 'Без времеви лимит — миксирай по всяко време', '+ Опционален 40-мин. Premium тест'], cta: 'Започни безплатно' },
+      { name: 'Уикенд пропуск', price: '€4.99', period: '72 часа', desc: '72 часа пълен Premium достъп. Перфектно за домашно парти, купон или уикенд гиг.', features: ['Всичко от Free Core, без лимити', 'Запис на сесии и експорт', 'Стрийминг от Google Drive', 'Всички персонализирани MIDI мапинги', 'Без абонамент — еднократно плащане'], cta: 'Вземи уикенд пропуск' },
+      { name: 'Premium', price: '€12.99', period: 'на месец', desc: 'Постоянен професионален достъп за работещи диджеи и ентусиасти.', features: ['Пълен неограничен достъп', 'Неограничен запис и Google Drive', 'Всички персонализирани MIDI профили', 'Десктоп версии (Очаквайте скоро)', 'Приоритетна поддръжка и нови функции'], cta: 'Премини на Premium' },
+    ]},
+    downloads: { title: 'Изтегляния и платформи', subtitle: 'Стартирай в браузъра си днес. Десктоп версии са на път.', launchNow: 'Стартирай сега', comingSoon: 'Очаквайте скоро', platforms: [
+      { name: 'Уеб приложение', status: 'Налично сега', desc: 'Стартирай веднага в браузъра. Без инсталация.', version: 'v1.0.0', size: '', minOs: '' },
+      { name: 'Windows', status: 'Очаквайте скоро', desc: 'Нативно десктоп приложение.', version: '', size: '', minOs: 'Windows 10/11' },
+      { name: 'Linux', status: 'Очаквайте скоро', desc: 'Нативно десктоп приложение.', version: '', size: '', minOs: '' },
+      { name: 'macOS', status: 'Очаквайте скоро', desc: 'Нативно десктоп приложение.', version: '', size: '', minOs: '' },
+    ]},
+    community: { title: 'Общност и обратна връзка', subtitle: 'Помогни за формирането на бъдещето на CROSSCUE.', feedTitle: 'Общностна емисия', feedSubtitle: 'Последни публикации, коментари и обратна връзка от общността на CROSSCUE.', items: [
+      { title: 'Докладвай бъг', desc: 'Намери нещо счупено? Уведоми ни и помогни за подобряването на CROSSCUE.', action: 'Докладвай' },
+      { title: 'Предложи функция', desc: 'Имаш идея? Изпрати я и гласувай за най-важното.', action: 'Предложи' },
+      { title: 'Facebook общност', desc: 'Последвай CROSSCUE във Facebook за актуализации и дискусии.', action: 'Посети' },
+      { title: 'Гласуване за функции', desc: 'Гласувай за предстоящи функции и оформяй roadmap-а.', action: 'Гласувай' },
+    ]},
+    docs: { title: 'Документи и помощ', subtitle: 'Всичко, което ти трябва, за да извлечеш максимума от CROSSCUE.', searchPlaceholder: 'Търси в документацията...', noResults: 'Не са намерени резултати.', docs: [
+      { title: 'Първи стъпки', desc: 'Зареди първите си песни и започни да миксираш за минути.' },
+      { title: 'Библиотека и метаданни', desc: 'Организирай, търси и управлявай музикалната си колекция.' },
+      { title: 'Авто DJ', desc: 'Остави CROSSCUE да миксира вместо теб с интелигентни преходи.' },
+      { title: 'MIDI настройка', desc: 'Свържи и настрой твоя хардуерен контролер.' },
+      { title: 'Офлайн режим', desc: 'Миксирай без интернет — всичко работи локално.' },
+      { title: 'ЧЗВ', desc: 'Отговори на най-честите въпроси.' },
+    ]},
+    status: { title: 'Всички системи оперативни', subtitle: 'Статус в реално време на услугите на CROSSCUE.', viewFull: 'Виж пълната страница за статус →', services: [
+      { name: 'Уеб приложение', status: 'Оперативен' },
+      { name: 'API', status: 'Оперативен' },
+      { name: 'Лицензиране', status: 'Оперативен' },
+      { name: 'Изтегляния', status: 'Оперативен' },
+    ]},
+    footer: { tagline: 'Винтидж виртуални плочи', subtitle: 'Миксирай. Анализирай. Свири. Офлайн или онлайн.', rights: 'Всички права запазени.', sections: [
+      { title: 'Продукт', links: ['Стартирай CROSSCUE', 'Демо на живо', 'Цени', 'Изтегляния'] },
+      { title: 'Ресурси', links: ['Документи и помощ', 'Първи стъпки', 'MIDI ръководство', 'ЧЗВ'] },
+      { title: 'Общност', links: ['Докладвай бъг', 'Гласуване за функции', 'Facebook'] },
+    ], legal: ['Поверителност', 'Условия', 'Бисквитки', 'Лицензиране', 'Контакт'] },
+    mobileHint: { tip: 'Съвет:', text: 'Завъртете телефона хоризонтално, за да виждате двата дека едновременно, или миксирайте директно чрез компактната лента за управление.', dismiss: 'Затвори съвета за ориентация' },
+  },
+
+  ...translationsExtended,
+};

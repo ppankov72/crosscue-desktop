@@ -1,0 +1,30 @@
+const HISTORY_KEY='crosscue.recordingHistory.v1';
+const candidates=['audio/webm;codecs=opus','audio/webm','audio/ogg;codecs=opus'];
+const pad=value=>String(value).padStart(2,'0');
+const stamp=date=>`${date.getFullYear()}-${pad(date.getMonth()+1)}-${pad(date.getDate())}_${pad(date.getHours())}-${pad(date.getMinutes())}-${pad(date.getSeconds())}`;
+const formatName=mime=>mime.includes('webm')?'WEBM / OPUS':mime.includes('ogg')?'OGG / OPUS':mime.toUpperCase()||'BROWSER DEFAULT';
+const safeName=value=>value.trim().replace(/[^a-z0-9]+/gi,'-').replace(/(^-|-$)/g,'').slice(0,60);
+const history=()=>{try{return JSON.parse(localStorage.getItem(HISTORY_KEY)||'[]');}catch{return [];}};
+
+class RecordingManager {
+ constructor(){this.listeners=new Set();this.status='ready';this.format='';this.quality='HIGH — 256 kbps';this.elapsed=0;this.error='';this.recorder=null;this.destination=null;this.tapNode=null;this.chunks=[];this.blob=null;this.filename='';this.startedAt=0;this.accumulated=0;this.timer=null;this.beforeUnload=this.beforeUnload.bind(this);}
+ snapshot(){return {status:this.status,format:formatName(this.format),quality:this.quality,elapsed:this.elapsed,error:this.error,complete:this.blob?{size:this.blob.size,filename:this.filename}:null,history:history()};}
+ subscribe(listener){this.listeners.add(listener);listener(this.snapshot());return()=>this.listeners.delete(listener);}
+ emit(){const state=this.snapshot();this.listeners.forEach(listener=>listener(state));}
+ beforeUnload(event){event.preventDefault();event.returnValue='A recording is in progress.';return event.returnValue;}
+ chooseFormat(){return candidates.find(type=>MediaRecorder.isTypeSupported(type))||'';}
+ connectTap(audioEngine){if(this.destination)return;this.destination=audioEngine.context.createMediaStreamDestination();this.tapNode=audioEngine.getMasterOutput();this.tapNode.connect(this.destination);}
+ async start(audioEngine,{sessionName='',djName=''}={}){if(!window.MediaRecorder){this.status='unsupported';this.error='RECORDING NOT AVAILABLE IN THIS BROWSER';this.emit();return;}try{await audioEngine.ensure();if(!audioEngine.getMasterOutput?.()){throw new Error('MASTER OUTPUT UNAVAILABLE');}this.releaseBlob();this.connectTap(audioEngine);this.format=this.chooseFormat();const options={audioBitsPerSecond:256000,...(this.format?{mimeType:this.format}:{})};try{this.recorder=new MediaRecorder(this.destination.stream,options);}catch{try{this.recorder=new MediaRecorder(this.destination.stream,this.format?{mimeType:this.format}:undefined);this.quality='HIGH — browser selected bitrate';}catch{this.recorder=new MediaRecorder(this.destination.stream);this.quality='HIGH — browser selected bitrate';}}this.format=this.recorder.mimeType||this.format;this.chunks=[];this.accumulated=0;this.elapsed=0;this.startedAt=Date.now();const date=new Date(),prefix=safeName(sessionName)||safeName(djName)||'CrossCue';this.filename=`${prefix}_${stamp(date)}.${this.format.includes('ogg')?'ogg':'webm'}`;this.recorder.ondataavailable=event=>{if(event.data?.size)this.chunks.push(event.data);};this.recorder.onerror=()=>{this.recorder.onstop=null;this.status='error';this.error='RECORDING FAILED';this.releaseTransport();this.emit();};this.recorder.onstop=()=>this.finish();this.recorder.start(1000);this.status='recording';this.timer=window.setInterval(()=>{this.elapsed=this.accumulated+Date.now()-this.startedAt;this.emit();},250);window.addEventListener('beforeunload',this.beforeUnload);this.emit();}catch{this.releaseTransport();this.status='error';this.error='RECORDING INITIALIZATION FAILED';this.emit();}}
+ pause(){if(this.status!=='recording')return;this.accumulated+=Date.now()-this.startedAt;this.elapsed=this.accumulated;this.recorder.pause();this.status='paused';this.stopTimer();window.removeEventListener('beforeunload',this.beforeUnload);this.emit();}
+ resume(){if(this.status!=='paused')return;this.startedAt=Date.now();this.recorder.resume();this.status='recording';this.timer=window.setInterval(()=>{this.elapsed=this.accumulated+Date.now()-this.startedAt;this.emit();},250);window.addEventListener('beforeunload',this.beforeUnload);this.emit();}
+ stop(){if(!['recording','paused'].includes(this.status))return;if(this.status==='recording')this.accumulated+=Date.now()-this.startedAt;this.elapsed=this.accumulated;this.stopTimer();window.removeEventListener('beforeunload',this.beforeUnload);this.status='finishing';this.recorder.stop();this.emit();}
+ finish(){this.blob=new Blob(this.chunks,{type:this.format||'audio/webm'});this.chunks=[];this.releaseTransport();this.status='complete';const item={id:`${Date.now()}`,name:this.filename.replace(/\.[^.]+$/,''),createdAt:new Date().toISOString(),duration:this.elapsed,format:formatName(this.format),size:this.blob.size};localStorage.setItem(HISTORY_KEY,JSON.stringify([item,...history()].slice(0,20)));this.emit();}
+ stopTimer(){window.clearInterval(this.timer);this.timer=null;}
+ releaseTransport(){this.stopTimer();window.removeEventListener('beforeunload',this.beforeUnload);if(this.tapNode&&this.destination){try{this.tapNode.disconnect(this.destination);}catch{}}this.destination?.stream.getTracks().forEach(track=>track.stop());this.destination=null;this.tapNode=null;this.recorder=null;}
+ releaseBlob(){this.blob=null;this.chunks=[];}
+ download(){if(!this.blob)return;const url=URL.createObjectURL(this.blob),link=document.createElement('a');link.href=url;link.download=this.filename;link.click();URL.revokeObjectURL(url);this.discard();}
+ discard(){this.releaseBlob();if(this.status==='complete'||this.status==='error'||this.status==='unsupported')this.status='ready';this.error='';this.emit();}
+ destroy(){if(['recording','paused'].includes(this.status))this.stop();else this.releaseTransport();this.releaseBlob();this.listeners.clear();}
+}
+export const recordingManager=new RecordingManager();
+export { HISTORY_KEY };

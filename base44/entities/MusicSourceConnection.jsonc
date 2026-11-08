@@ -1,0 +1,63 @@
+{
+  "name": "MusicSourceConnection",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string",
+      "description": "Owner user ID"
+    },
+    "provider": {
+      "type": "string",
+      "enum": [
+        "google_drive",
+        "dropbox",
+        "onedrive",
+        "soundcloud",
+        "mixcloud"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "connected",
+        "disconnected",
+        "error",
+        "expired"
+      ],
+      "default": "connected"
+    },
+    "account_name": {
+      "type": "string",
+      "description": "Display name of the connected provider account"
+    },
+    "account_id": {
+      "type": "string",
+      "description": "Provider-specific account identifier"
+    },
+    "connected_at": {
+      "type": "string"
+    },
+    "last_sync_at": {
+      "type": "string"
+    },
+    "error_message": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "user_id",
+    "provider"
+  ],
+  "rls": {
+    "read": {
+      "data.user_id": "{{user.id}}"
+    },
+    "create": true,
+    "update": {
+      "data.user_id": "{{user.id}}"
+    },
+    "delete": {
+      "data.user_id": "{{user.id}}"
+    }
+  }
+}

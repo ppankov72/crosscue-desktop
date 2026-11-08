@@ -1,0 +1,81 @@
+{
+  "name": "Subscription",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "plan_id": {
+      "type": "string"
+    },
+    "plan_code": {
+      "type": "string"
+    },
+    "provider": {
+      "type": "string"
+    },
+    "provider_customer_id": {
+      "type": "string"
+    },
+    "provider_subscription_id": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "active",
+        "past_due",
+        "canceled",
+        "expired",
+        "paused"
+      ],
+      "default": "pending"
+    },
+    "current_period_start": {
+      "type": "string"
+    },
+    "current_period_end": {
+      "type": "string"
+    },
+    "cancel_at_period_end": {
+      "type": "boolean",
+      "default": false
+    },
+    "canceled_at": {
+      "type": "string"
+    },
+    "entitlement_id": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "user_id",
+    "plan_id"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

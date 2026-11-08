@@ -1,0 +1,96 @@
+{
+  "name": "Entitlement",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "trial",
+        "weekend",
+        "premium"
+      ],
+      "default": "trial"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "expired",
+        "revoked",
+        "pending"
+      ],
+      "default": "active"
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "trial",
+        "payment",
+        "admin",
+        "migration",
+        "promotional"
+      ],
+      "default": "trial"
+    },
+    "starts_at": {
+      "type": "string"
+    },
+    "expires_at": {
+      "type": "string"
+    },
+    "trial_id": {
+      "type": "string"
+    },
+    "payment_reference": {
+      "type": "string"
+    },
+    "license_reference": {
+      "type": "string"
+    },
+    "manually_granted": {
+      "type": "boolean",
+      "default": false
+    },
+    "granted_by": {
+      "type": "string"
+    },
+    "revoked_at": {
+      "type": "string"
+    },
+    "revoke_reason": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "user_id",
+    "type"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

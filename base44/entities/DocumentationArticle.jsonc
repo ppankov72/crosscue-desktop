@@ -1,0 +1,83 @@
+{
+  "name": "DocumentationArticle",
+  "type": "object",
+  "properties": {
+    "canonical_key": {
+      "type": "string",
+      "description": "Unique logical article key, shared across language versions (e.g. 'getting-started-overview')"
+    },
+    "category": {
+      "type": "string",
+      "description": "Category ID (e.g. 'getting-started', 'mixer', 'faq')"
+    },
+    "category_title": {
+      "type": "string",
+      "description": "Display title of the category in this language"
+    },
+    "category_icon": {
+      "type": "string",
+      "description": "Lucide icon name for the category"
+    },
+    "language": {
+      "type": "string",
+      "enum": [
+        "en",
+        "de",
+        "es",
+        "bg"
+      ]
+    },
+    "title": {
+      "type": "string"
+    },
+    "body": {
+      "type": "string",
+      "description": "Rich text content (sanitized HTML)"
+    },
+    "sort_order": {
+      "type": "number",
+      "default": 0
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "published",
+        "archived"
+      ],
+      "default": "draft"
+    },
+    "updated_by": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "canonical_key",
+    "category",
+    "language",
+    "title",
+    "body"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

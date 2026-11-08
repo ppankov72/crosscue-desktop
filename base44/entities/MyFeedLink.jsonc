@@ -1,0 +1,101 @@
+{
+  "name": "MyFeedLink",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string"
+    },
+    "user_email": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "linked",
+        "unlinked",
+        "error"
+      ],
+      "default": "pending"
+    },
+    "myfeed_user_id": {
+      "type": "string"
+    },
+    "myfeed_display_name": {
+      "type": "string"
+    },
+    "myfeed_avatar_url": {
+      "type": "string"
+    },
+    "myfeed_profile_url": {
+      "type": "string"
+    },
+    "link_token": {
+      "type": "string"
+    },
+    "link_token_expires_at": {
+      "type": "string"
+    },
+    "linked_at": {
+      "type": "string"
+    },
+    "unlinked_at": {
+      "type": "string"
+    },
+    "last_sync_at": {
+      "type": "string"
+    },
+    "last_status": {
+      "type": "string"
+    },
+    "last_error": {
+      "type": "string"
+    },
+    "share_activity_enabled": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "user_id"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": true,
+    "update": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

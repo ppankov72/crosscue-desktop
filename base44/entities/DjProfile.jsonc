@@ -1,0 +1,152 @@
+{
+  "name": "DjProfile",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string"
+    },
+    "display_name": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "avatar_type": {
+      "type": "string",
+      "enum": [
+        "auto",
+        "gallery",
+        "upload",
+        "text"
+      ],
+      "default": "auto"
+    },
+    "avatar_url": {
+      "type": "string"
+    },
+    "avatar_seed": {
+      "type": "string"
+    },
+    "bio": {
+      "type": "string"
+    },
+    "country": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "genres": {
+      "type": "string"
+    },
+    "website": {
+      "type": "string"
+    },
+    "visibility": {
+      "type": "string",
+      "enum": [
+        "public",
+        "unlisted",
+        "private"
+      ],
+      "default": "private"
+    },
+    "show_country": {
+      "type": "boolean",
+      "default": false
+    },
+    "show_city": {
+      "type": "boolean",
+      "default": false
+    },
+    "show_website": {
+      "type": "boolean",
+      "default": false
+    },
+    "show_social_links": {
+      "type": "boolean",
+      "default": true
+    },
+    "social_links": {
+      "type": "string"
+    },
+    "is_demo": {
+      "type": "boolean",
+      "default": false
+    },
+    "demo_code": {
+      "type": "string"
+    },
+    "last_profile_change_at": {
+      "type": "string"
+    },
+    "moderation_status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "hidden",
+        "restored"
+      ],
+      "default": "active"
+    },
+    "moderated_by": {
+      "type": "string"
+    },
+    "moderated_at": {
+      "type": "string"
+    },
+    "moderation_reason": {
+      "type": "string"
+    },
+    "external_profile_provider": {
+      "type": "string"
+    },
+    "external_profile_id": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "user_id",
+    "slug"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.visibility": {
+            "$in": [
+              "public",
+              "unlisted"
+            ]
+          }
+        },
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": true,
+    "update": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

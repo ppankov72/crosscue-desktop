@@ -1,0 +1,102 @@
+{
+  "name": "Invitation",
+  "type": "object",
+  "properties": {
+    "email": {
+      "type": "string"
+    },
+    "invitation_type": {
+      "type": "string",
+      "enum": [
+        "guest_dj",
+        "member",
+        "moderator",
+        "support",
+        "admin"
+      ]
+    },
+    "role_to_assign": {
+      "type": "string",
+      "enum": [
+        "member",
+        "tester",
+        "moderator",
+        "support",
+        "admin"
+      ]
+    },
+    "entitlement_to_grant": {
+      "type": "string",
+      "enum": [
+        "none",
+        "weekend",
+        "premium"
+      ]
+    },
+    "created_by": {
+      "type": "string"
+    },
+    "created_by_email": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "expires_at": {
+      "type": "string"
+    },
+    "accepted_at": {
+      "type": "string"
+    },
+    "accepted_by": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "accepted",
+        "expired",
+        "revoked"
+      ],
+      "default": "pending"
+    },
+    "token_hash": {
+      "type": "string"
+    },
+    "campaign": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "email",
+    "invitation_type",
+    "role_to_assign",
+    "token_hash"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

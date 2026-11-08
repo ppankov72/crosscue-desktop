@@ -1,0 +1,77 @@
+{
+  "name": "CrosscueFeatureRequest",
+  "type": "object",
+  "properties": {
+    "author_user_id": {
+      "type": "string"
+    },
+    "author_email": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "player",
+        "mixer",
+        "library",
+        "playlist",
+        "midi",
+        "recording",
+        "portal",
+        "community",
+        "mobile",
+        "integration",
+        "other"
+      ],
+      "default": "other"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "submitted",
+        "under_review",
+        "planned",
+        "in_progress",
+        "released",
+        "declined"
+      ],
+      "default": "submitted"
+    },
+    "vote_count": {
+      "type": "number",
+      "default": 0
+    },
+    "admin_response": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "author_user_id",
+    "title",
+    "description"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": true,
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

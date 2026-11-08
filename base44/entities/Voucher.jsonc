@@ -1,0 +1,123 @@
+{
+  "name": "Voucher",
+  "type": "object",
+  "properties": {
+    "voucher_code": {
+      "type": "string",
+      "description": "Unique redemption code (e.g. CC-WEEKEND-XXXX-XXXX). Random, non-sequential."
+    },
+    "voucher_type": {
+      "type": "string",
+      "enum": [
+        "gift_voucher",
+        "contest_prize",
+        "promotional_pass",
+        "partner_pass",
+        "community_prize"
+      ],
+      "default": "gift_voucher"
+    },
+    "entitlement_type": {
+      "type": "string",
+      "enum": [
+        "weekend",
+        "premium_1m",
+        "premium_3m",
+        "premium_1y"
+      ],
+      "default": "weekend",
+      "description": "What the voucher grants when redeemed. Duration starts at redemption."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "created",
+        "sent",
+        "redeemed",
+        "expired",
+        "revoked"
+      ],
+      "default": "created"
+    },
+    "recipient_email": {
+      "type": "string",
+      "description": "Optional intended recipient email"
+    },
+    "recipient_dj_name": {
+      "type": "string",
+      "description": "Optional recipient DJ nickname"
+    },
+    "message": {
+      "type": "string",
+      "description": "Optional short gift/prize message"
+    },
+    "source_campaign": {
+      "type": "string",
+      "description": "Campaign or source tag, e.g. AI_TRACK_OF_THE_WEEK"
+    },
+    "created_by": {
+      "type": "string",
+      "description": "Admin user ID who created the voucher"
+    },
+    "redeemed_at": {
+      "type": "string"
+    },
+    "redeemed_by": {
+      "type": "string",
+      "description": "User ID who redeemed the voucher"
+    },
+    "redeemed_by_email": {
+      "type": "string"
+    },
+    "entitlement_id": {
+      "type": "string",
+      "description": "Resulting Entitlement record ID after redemption"
+    },
+    "expires_at": {
+      "type": "string",
+      "description": "Optional voucher expiry date (must be redeemed before this). Not the entitlement start."
+    },
+    "max_uses": {
+      "type": "number",
+      "default": 1,
+      "description": "Max redemption count. 1 = single-use."
+    },
+    "use_count": {
+      "type": "number",
+      "default": 0
+    },
+    "revoked_at": {
+      "type": "string"
+    },
+    "revoke_reason": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "voucher_code",
+    "voucher_type",
+    "entitlement_type"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

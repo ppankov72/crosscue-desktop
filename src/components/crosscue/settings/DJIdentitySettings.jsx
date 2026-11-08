@@ -1,0 +1,9 @@
+import { useState } from 'react';
+import { base44 } from '@/api/base44Client';
+import { Image } from '@/components/ui/image';
+
+export default function DJIdentitySettings({ settings, onUpdate }) {
+ const [uploading,setUploading]=useState(false),[error,setError]=useState('');
+ const upload=async event=>{const file=event.target.files?.[0];if(!file)return;setUploading(true);setError('');try{const {file_url}=await base44.integrations.Core.UploadFile({file});onUpdate({djLogoUrl:file_url});}catch{setError('Logo upload failed. Please try again.');}finally{setUploading(false);event.target.value='';}};
+ return <section className="space-y-2 border-t border-[#6d6045] pt-3"><h3 className="text-sm font-bold tracking-widest text-[#d5ad58]">DJ IDENTITY</h3><div className="flex gap-1">{[['default','DEFAULT'],['text','TEXT'],['image','IMAGE LOGO']].map(([value,label])=><button key={value} className={`mini-button flex-1 ${settings.djIdentityMode===value?'vinyl-active':''}`} onClick={()=>onUpdate({djIdentityMode:value})}>{label}</button>)}</div>{settings.djIdentityMode==='text'&&<label className="block text-sm"><span className="mb-1 block">DJ NAME</span><input className="source-input w-full" maxLength={32} value={settings.djName||''} placeholder="DJ IZROD" onChange={event=>onUpdate({djName:event.target.value.slice(0,32)})}/></label>}{settings.djIdentityMode==='image'&&<div className="space-y-2"><label className="metal-button cursor-pointer">{uploading?'UPLOADING…':'UPLOAD LOGO'}<input className="hidden" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml" onChange={upload}/></label>{settings.djLogoUrl&&<><div className="h-14 border border-[#6d6045]"><Image src={settings.djLogoUrl} alt="DJ logo preview" className="h-full w-full" fittingType="fit"/></div><button className="mini-button" onClick={()=>onUpdate({djLogoUrl:''})}>REMOVE LOGO</button></>}{error&&<p className="text-xs text-red-400">{error}</p>}</div>}</section>;
+}

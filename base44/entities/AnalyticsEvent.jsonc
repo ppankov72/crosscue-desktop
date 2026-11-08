@@ -1,0 +1,239 @@
+{
+  "name": "AnalyticsEvent",
+  "type": "object",
+  "properties": {
+    "installation_id": {
+      "type": "string"
+    },
+    "session_id": {
+      "type": "string"
+    },
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "pageview",
+        "session_start",
+        "playback_start",
+        "playback_stop",
+        "StartMix_Free",
+        "Intent_Mix_30s",
+        "trial_started",
+        "trial_expired",
+        "trial_feedback",
+        "voucher_redeemed",
+        "signup",
+        "login",
+        "logout",
+        "custom",
+        "landing_view",
+        "launch_clicked",
+        "signup_completed",
+        "trial_playback_started",
+        "trial_playback_10min",
+        "trial_playback_25min",
+        "trial_exhausted",
+        "weekend_checkout_started",
+        "premium_checkout_started",
+        "payment_succeeded"
+      ]
+    },
+    "page": {
+      "type": "string"
+    },
+    "referrer": {
+      "type": "string"
+    },
+    "traffic_source": {
+      "type": "string",
+      "enum": [
+        "organic",
+        "direct",
+        "referral",
+        "social",
+        "email",
+        "paid",
+        "none"
+      ],
+      "default": "none"
+    },
+    "traffic_source_detail": {
+      "type": "string"
+    },
+    "utm_source": {
+      "type": "string"
+    },
+    "utm_medium": {
+      "type": "string"
+    },
+    "utm_campaign": {
+      "type": "string"
+    },
+    "country": {
+      "type": "string"
+    },
+    "countryCode": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "latitude": {
+      "type": "number"
+    },
+    "longitude": {
+      "type": "number"
+    },
+    "device": {
+      "type": "string"
+    },
+    "os": {
+      "type": "string"
+    },
+    "browser": {
+      "type": "string"
+    },
+    "is_trial_user": {
+      "type": "boolean",
+      "default": false
+    },
+    "is_authenticated": {
+      "type": "boolean",
+      "default": false
+    },
+    "email": {
+      "type": "string"
+    },
+    "ip": {
+      "type": "string"
+    },
+    "custom_data": {
+      "type": "string"
+    },
+    "user_id": {
+      "type": "string",
+      "description": "Server-verified identity"
+    },
+    "user_role": {
+      "type": "string"
+    },
+    "user_custom_role": {
+      "type": "string"
+    },
+    "origin": {
+      "type": "string"
+    },
+    "environment": {
+      "type": "string"
+    },
+    "identity_internal": {
+      "type": "boolean",
+      "default": false
+    },
+    "traffic_class": {
+      "type": "string",
+      "enum": [
+        "real",
+        "internal",
+        "test",
+        "bot"
+      ],
+      "default": "real"
+    },
+    "classified_at": {
+      "type": "string"
+    },
+    "classification_reason": {
+      "type": "string"
+    },
+    "anonymous_id": {
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string"
+    },
+    "medium": {
+      "type": "string"
+    },
+    "campaign": {
+      "type": "string"
+    },
+    "landing_page": {
+      "type": "string"
+    },
+    "first_touch_source": {
+      "type": "string"
+    },
+    "first_touch_medium": {
+      "type": "string"
+    },
+    "first_touch_campaign": {
+      "type": "string"
+    },
+    "first_touch_referrer": {
+      "type": "string"
+    },
+    "plan": {
+      "type": "string"
+    },
+    "amount": {
+      "type": "number"
+    },
+    "currency": {
+      "type": "string"
+    },
+    "stripe_session_id": {
+      "type": "string"
+    },
+    "order_id": {
+      "type": "string"
+    },
+    "event_key": {
+      "type": "string"
+    },
+    "trial_id": {
+      "type": "string"
+    },
+    "user_agent": {
+      "type": "string"
+    },
+    "webdriver": {
+      "type": "boolean"
+    },
+    "request_count_60s": {
+      "type": "number"
+    },
+    "browser_identity_hash": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "installation_id",
+    "session_id",
+    "event_type"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

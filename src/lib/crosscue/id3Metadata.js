@@ -1,0 +1,1 @@
+export * from '@/lib/decksmith/id3Metadata';

@@ -1,0 +1,80 @@
+{
+  "name": "MarketIntelligence",
+  "type": "object",
+  "properties": {
+    "competitor_name": {
+      "type": "string"
+    },
+    "product_name": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    },
+    "country": {
+      "type": "string",
+      "description": "Market/country observed"
+    },
+    "price": {
+      "type": "number"
+    },
+    "currency": {
+      "type": "string",
+      "default": "EUR"
+    },
+    "pricing_model": {
+      "type": "string",
+      "description": "e.g. subscription, one-time, freemium"
+    },
+    "usp": {
+      "type": "string",
+      "description": "Unique selling proposition observed"
+    },
+    "target_audience": {
+      "type": "string"
+    },
+    "observed_campaign": {
+      "type": "string",
+      "description": "Campaign or ad observed"
+    },
+    "observed_message": {
+      "type": "string"
+    },
+    "date_checked": {
+      "type": "string",
+      "format": "date"
+    },
+    "tags": {
+      "type": "string",
+      "description": "Comma-separated tags"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "competitor_name"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

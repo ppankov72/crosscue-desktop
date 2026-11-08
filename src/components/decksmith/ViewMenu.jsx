@@ -1,0 +1,6 @@
+import { Check, Eye } from 'lucide-react';
+import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+const items=[['deckA','Deck A'],['mixer','Mixer'],['deckB','Deck B'],['meters','VU Meters'],['library','Music Library / Playlist']];
+export default function ViewMenu({ sections, onToggle }) {
+ return <DropdownMenu><DropdownMenuTrigger asChild><button className="metal-button"><Eye size={14}/> VIEW</button></DropdownMenuTrigger><DropdownMenuContent align="end" className="w-52 border-[#625a49] bg-[#25231e] text-[#eee1c6]"><DropdownMenuLabel className="text-[10px] tracking-wider text-[#d5ad58]">VISIBLE SECTIONS</DropdownMenuLabel><DropdownMenuSeparator className="bg-[#625a49]"/>{items.map(([key,label])=><DropdownMenuCheckboxItem key={key} checked={sections[key]} onCheckedChange={()=>onToggle(key)} className="cursor-pointer text-xs focus:bg-[#3a352a] focus:text-[#fff5d7]"><Check className={`mr-2 h-3 w-3 ${sections[key]?'opacity-100':'opacity-0'}`}/>{label}</DropdownMenuCheckboxItem>)}</DropdownMenuContent></DropdownMenu>;
+}

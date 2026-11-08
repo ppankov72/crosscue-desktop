@@ -1,0 +1,23 @@
+/* Portal-only accessibility contrast: preserve surfaces and actions, darken their ink. */
+.portal-readable,
+.portal-readable * { color: #000000 !important; }
+/* Generated avatar: a light, high-contrast badge on the portal's light surfaces. */
+.portal-readable .dj-avatar-generated { background: #fde68a !important; border-color: #000000 !important; }
+.portal-readable .dj-avatar-icon { color: #000000 !important; stroke-width: 2.5; }
+.portal-readable input,
+.portal-readable textarea,
+.portal-readable select,
+.portal-readable [role='combobox'] { border-color: #000000 !important; color: #000000 !important; background-color: #ffffff !important; -webkit-text-fill-color: #000000; }
+.portal-readable input::placeholder,
+.portal-readable textarea::placeholder { color: #000000 !important; opacity: 1; -webkit-text-fill-color: #000000; }
+/* Keep action buttons colored but give black lettering a readable light surface. */
+.portal-readable :is(button, a)[class~='bg-stone-900'] { background-color: #e7e5e4 !important; }
+.portal-readable :is(button, a)[class~='bg-amber-600'],
+.portal-readable :is(button, a)[class~='bg-amber-700'] { background-color: #fcd34d !important; }
+.portal-readable :is(button, a)[class~='bg-red-600'],
+.portal-readable :is(button, a)[class~='bg-red-700'] { background-color: #fca5a5 !important; }
+.portal-readable [class~='bg-green-600'] { background-color: #86efac !important; }
+.portal-readable [class~='bg-red-600'] { background-color: #fca5a5 !important; }
+.portal-readable [class~='bg-stone-800'] { background-color: #e7e5e4 !important; }
+.portal-readable [class~='opacity-60'],
+.portal-readable [class~='disabled:opacity-50']:disabled { opacity: 1 !important; }

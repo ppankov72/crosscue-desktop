@@ -1,0 +1,56 @@
+{
+  "name": "CmsMedia",
+  "type": "object",
+  "properties": {
+    "filename": {
+      "type": "string",
+      "description": "Original filename"
+    },
+    "title": {
+      "type": "string",
+      "description": "Media title for CMS display"
+    },
+    "alt_text": {
+      "type": "string",
+      "description": "Accessibility alt text"
+    },
+    "description": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string",
+      "description": "Public URL of the media file (from UploadFile)"
+    },
+    "width": {
+      "type": "number"
+    },
+    "height": {
+      "type": "number"
+    },
+    "uploaded_by": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "filename",
+    "url"
+  ],
+  "rls": {
+    "read": true,
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

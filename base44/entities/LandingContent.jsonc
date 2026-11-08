@@ -1,0 +1,59 @@
+{
+  "name": "LandingContent",
+  "type": "object",
+  "properties": {
+    "section": {
+      "type": "string",
+      "description": "Landing page section: hero, why, features, tracks, pricing, downloads, community, cta, seo"
+    },
+    "language": {
+      "type": "string",
+      "enum": [
+        "en",
+        "de",
+        "es",
+        "bg"
+      ],
+      "default": "en"
+    },
+    "content": {
+      "type": "string",
+      "description": "JSON string with the section's editable content fields"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "published",
+        "archived"
+      ],
+      "default": "draft"
+    },
+    "updated_by": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "section",
+    "language",
+    "content"
+  ],
+  "rls": {
+    "read": true,
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

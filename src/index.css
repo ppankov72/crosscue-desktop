@@ -1,0 +1,410 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root { --success: 142 72% 29%; }
+.dark { --success: 142 60% 48%; }
+@layer base { :root { --background: 45 8% 5%; --foreground: 38 44% 90%; --border: 43 20% 28%; --ring: 42 54% 52%; --font-body: ui-sans-serif, system-ui, sans-serif; } html{overflow-y:scroll;scrollbar-gutter:stable;} *{@apply border-border;} body{@apply bg-background text-foreground font-body;} }
+@layer components { .equipment-panel{@apply min-w-0 border border-[#5b513d] bg-[#1a1916] p-3 shadow-[inset_0_1px_1px_rgba(255,255,255,.07),0_4px_16px_rgba(0,0,0,.5)];background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.014),rgba(255,255,255,.014) 1px,transparent 1px,transparent 4px)} .metal-button{@apply inline-flex items-center justify-center gap-1 border border-[#82704d] bg-[#292722] px-2 py-1.5 text-[13px] font-bold tracking-wider text-[#eee1c6] shadow-[inset_0_1px_rgba(255,255,255,.12),0_1px_2px_#000] active:translate-y-px;} .mini-button{@apply inline-flex items-center justify-center gap-1 border border-[#625a49] bg-[#25231e] px-1.5 py-1 text-[12px] font-bold text-[#d9ceb7];} .deck-label{@apply text-sm font-bold tracking-[.2em] text-[#ff2800];} .deck-workspace{display:grid;grid-template-columns:minmax(0,1fr) minmax(8rem,clamp(8rem,14vw,11rem));gap:.75rem;align-items:start;min-width:0}.platter-viewport{display:grid;place-items:center;width:clamp(8rem,14vw,11rem);max-width:100%;aspect-ratio:1;overflow:clip;contain:layout paint}.platter{@apply grid place-items-center rounded-full border-[7px] border-[#312f2a] bg-[repeating-radial-gradient(circle,#171716_0,#171716_3px,#0a0a0a_4px,#171716_7px)] shadow-[inset_0_0_0_2px_#4a4539,0_4px_11px_#000];position:relative;width:100%;max-width:100%;aspect-ratio:1;height:auto;box-sizing:border-box;touch-action:none;cursor:default;will-change:transform;}.vinyl-spiral{filter:drop-shadow(0 0 1.5px rgba(57,255,20,.38));opacity:.82;} .platter.vinyl-on{cursor:grab;border-color:#b9903e}.platter.vinyl-on:active{cursor:grabbing}.spinning{animation:spin var(--spin-speed,2.2s) linear infinite}.record-label{@apply grid h-14 w-14 place-items-center rounded-full border border-[#b28b3c] bg-[#735522] text-[10px] text-[#f3e5ba];}.vertical-slider{writing-mode:vertical-lr;direction:rtl;height:55px;accent-color:#ff2800}.precision-pitch{height:104px}.channel-fader{writing-mode:vertical-lr;direction:rtl;height:84px;accent-color:#ff2800}.precision-fader{height:84px}.crossfader{@apply mt-2 w-full accent-[#ff2800]} .crossfader::-webkit-slider-thumb{box-shadow:0 0 0 1px #171511,0 0 0 3px #ff2800} .crossfader::-moz-range-thumb{box-shadow:0 0 0 1px #171511,0 0 0 3px #ff2800}.source-input,.library-search{@apply border border-[#5f543d] bg-[#10100f] px-2 py-1 text-xs text-[#eee1c6] outline-none;}.waveform-viewport{position:relative;overflow:hidden;contain:layout paint}.waveform-viewport::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse at center,rgba(255,242,168,.12) 0%,rgba(255,242,168,.07) 20%,rgba(255,242,168,.03) 40%,rgba(255,242,168,0) 70%)}.waveform-viewport canvas{position:relative;z-index:1}.timeline-readout{font-variant-numeric:tabular-nums}.timeline-time{display:inline-block;min-width:5ch;text-align:center}.timeline-pitch{display:inline-block;min-width:5ch;text-align:right}.library-panel{contain:layout paint}.table-head{@apply px-2 text-sm font-bold tracking-wider text-[#a49778]}.library-row{@apply cursor-grab border-t border-[#383429] px-2 py-2 text-sm font-medium text-[#d1c5ac] hover:bg-[#29261f];}.table-head>span,.library-row>span{min-width:0;} .vinyl-active{@apply border-[#d5ad58] bg-[#755a27] text-[#fff5d7];} .vu-meter{position:relative;height:190px;width:100%;overflow:hidden;border:3px solid #3a3327;border-radius:3px;background:#d8c27a;box-shadow:inset 0 0 0 2px #9b8142,inset 0 0 18px rgba(95,68,20,.32),0 2px 5px #000}.vu-meter svg{display:block;width:100%;height:100%}.vu-face{fill:#f3e7b1;stroke:#6e5a2d;stroke-width:1.2}.vu-arc{fill:none;stroke:#211e18;stroke-width:1.1}.vu-overload-arc{fill:none;stroke:#a81e18;stroke-width:3.2;stroke-linecap:round}.vu-minor{stroke:#211e18;stroke-width:.85}.vu-minor-overload{stroke:#a81e18;stroke-width:.95}.vu-meter svg text{font-family:ui-monospace,monospace;font-size:16px;font-weight:800;fill:#211e18}.vu-meter svg .vu-overload{fill:#a81e18}.vu-meter svg .vu-zero{font-size:18px;font-weight:900}.vu-reference{font-size:9px!important;letter-spacing:1.5px}.vu-needle{stroke:#171511;stroke-width:1.8;stroke-linecap:round;will-change:transform}.vu-pivot{fill:#171511;stroke:#e7d69b;stroke-width:1.8}.vu-label{position:absolute;bottom:13px;left:18px;font-size:15px;font-weight:900;letter-spacing:.14em;color:#171511}.vu-db{position:absolute;bottom:13px;right:18px;font-size:13px;font-weight:800;color:#a81e18} }
+/* Custom div-based vertical slider — replaces native <input type="range"> for precise scale alignment. */
+.vertical-slider-track{position:relative;width:34px;display:flex;justify-content:center;flex-shrink:0}
+.vertical-slider-groove{position:absolute;left:50%;top:0;transform:translateX(-50%);width:7px;height:100%;border:1px solid #050606;border-radius:2px;background:linear-gradient(180deg,#080909 0%,#292d2e 28%,#050606 52%,#1d2021 100%);box-shadow:inset 0 1px 2px #000,0 1px rgba(255,255,255,.28)}
+.vertical-slider-thumb{position:absolute;left:50%;transform:translateX(-50%);width:32px;border:1px solid #101212;border-radius:2px;background:linear-gradient(90deg,#2a2e2f 0%,#eef1ef 18%,#9ba09f 40%,#ffffff 52%,#868b8a 64%,#2a2e2f 100%);box-shadow:inset 0 1px rgba(255,255,255,.95),inset 0 -2px rgba(0,0,0,.7),0 1px 3px #000;transition:box-shadow .12s ease,filter .12s ease;cursor:inherit;pointer-events:none}
+.vertical-slider-track:hover .vertical-slider-thumb{filter:brightness(1.12)}
+.vertical-slider-thumb.active{box-shadow:inset 0 1px rgba(255,255,255,1),inset 0 -2px rgba(0,0,0,.6),0 0 8px 2px rgba(255,210,80,.5),0 1px 3px #000}
+.crosscue-app[data-crosscue-theme='crosscue'] .vertical-slider-thumb{background:linear-gradient(90deg,#34393a 0%,#e1e4e2 20%,#787e7d 42%,#f5f6f2 52%,#646a69 68%,#242828 100%)}
+.crosscue-app[data-crosscue-theme='crosscue'] .vertical-slider-thumb.active{box-shadow:inset 0 1px rgba(255,255,255,1),inset 0 -2px rgba(0,0,0,.6),0 0 12px 1px rgba(255,128,192,.9),0 0 7px rgba(255,204,0,.75),0 1px 3px #000}
+.crosscue-app[data-crosscue-theme^='flag-'] .vertical-slider-thumb{border-color:var(--flag-border,#101212)}
+.crosscue-app[data-crosscue-theme^='flag-'] .vertical-slider-groove{border-color:var(--flag-border,#050606)}
+
+/* Custom div-based horizontal crossfader with mechanical stops & precision pointer capture */
+.horizontal-crossfader-track{position:relative;width:100%;height:30px;display:flex;align-items:center;touch-action:none;cursor:pointer;user-select:none;outline:none}
+.horizontal-crossfader-groove{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);height:7px;border:1px solid #050606;border-radius:2px;background:linear-gradient(180deg,#080909 0%,#292d2e 28%,#050606 52%,#1d2021 100%);box-shadow:inset 0 1px 2px #000,0 1px rgba(255,255,255,.28)}
+.horizontal-crossfader-thumb{position:absolute;top:50%;transform:translateY(-50%);width:26px;height:24px;border:1px solid #101212;border-radius:2px;background:linear-gradient(90deg,#34393a 0%,#e1e4e2 20%,#787e7d 42%,#f5f6f2 52%,#646a69 68%,#242828 100%);box-shadow:inset 0 1px rgba(255,255,255,.95),inset 0 -2px rgba(0,0,0,.7),0 1px 3px #000;transition:box-shadow .12s ease,filter .12s ease;pointer-events:none}
+.horizontal-crossfader-track:hover .horizontal-crossfader-thumb{filter:brightness(1.12)}
+.horizontal-crossfader-thumb.active{box-shadow:inset 0 1px rgba(255,255,255,1),inset 0 -2px rgba(0,0,0,.6),0 0 12px 2px rgba(255,128,192,.9),0 0 7px rgba(255,204,0,.75),0 1px 3px #000}
+.crosscue-app[data-crosscue-theme^='flag-'] .horizontal-crossfader-thumb{border-color:var(--flag-border,#101212)}
+.crosscue-app[data-crosscue-theme^='flag-'] .horizontal-crossfader-groove{border-color:var(--flag-border,#050606)}
+
+@keyframes spin {to{transform:rotate(360deg)}}
+@keyframes marquee {from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.animate-marquee{animation:marquee 20s linear infinite}
+.metal-button:disabled,.mini-button:disabled{cursor:not-allowed;opacity:.38;filter:saturate(.45)}
+.crosscue-app[data-show-waveform='false'] .waveform-viewport{display:none}
+
+/* CROSSCUE — precision graphite hardware finish. DECKSMITH intentionally has no override. */
+html[data-crosscue-theme='crosscue'] body{background:#080a0c;color:#d9dde0}.crosscue-app[data-crosscue-theme='crosscue']{background:#080a0c;color:#d9dde0}.crosscue-app[data-crosscue-theme='crosscue'] .equipment-panel{border-color:#4b5259;background-color:#171b1f;background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.025),rgba(255,255,255,.025) 1px,transparent 1px,transparent 5px);box-shadow:inset 0 1px 1px rgba(255,255,255,.08),0 4px 16px rgba(0,0,0,.55)}.crosscue-app[data-crosscue-theme='crosscue'] .metal-button,.crosscue-app[data-crosscue-theme='crosscue'] .mini-button{border-color:#606972;background:#242a2f;color:#e3e8eb;box-shadow:inset 0 1px rgba(255,255,255,.12),0 1px 2px #000}.crosscue-app[data-crosscue-theme='crosscue'] .deck-label{color:#c3cbd1}.crosscue-app[data-crosscue-theme='crosscue'] .platter{border-color:#343b42;background-color:#111417;box-shadow:inset 0 0 0 2px #59626a,0 4px 11px #000}.crosscue-app[data-crosscue-theme='crosscue'] .record-label{border-color:#9ba5ac;background:#343b42;color:#eef2f4}.crosscue-app[data-crosscue-theme='crosscue'] .source-input,.crosscue-app[data-crosscue-theme='crosscue'] .library-search{border-color:#515a63;background:#0d1013;color:#e3e8eb}.crosscue-app[data-crosscue-theme='crosscue'] .library-row{border-color:#30373e;color:#d6dce0}.crosscue-app[data-crosscue-theme='crosscue'] .library-row:hover{background:#252b30}.crosscue-app[data-crosscue-theme='crosscue'] .table-head{background:#171b1f;color:#aeb7bd}.crosscue-app[data-crosscue-theme='crosscue'] .waveform-viewport{border-color:#525c65;background:#0d1013}.crosscue-app[data-crosscue-theme='crosscue'] .vu-meter{border-color:#414950;background:#bac1c5;box-shadow:inset 0 0 0 2px #6d767d,inset 0 0 18px rgba(25,31,35,.25),0 2px 5px #000}.crosscue-app[data-crosscue-theme='crosscue'] .vu-face{fill:#dbe0e2;stroke:#586169}.crosscue-app[data-crosscue-theme='crosscue'] .vu-arc,.crosscue-app[data-crosscue-theme='crosscue'] .vu-minor{stroke:#252b30}.crosscue-app[data-crosscue-theme='crosscue'] .vu-pivot{fill:#20252a;stroke:#e1e6e8}.crosscue-app[data-crosscue-theme='crosscue'] [class~='text-[#d5ad58]'],.crosscue-app[data-crosscue-theme='crosscue'] [class~='text-[#bb8d36]']{color:#d4dbe0}.crosscue-app[data-crosscue-theme='crosscue'] [class~='text-[#a49778]']{color:#9da8b0}.crosscue-app[data-crosscue-theme='crosscue'] .vinyl-active{border-color:#b9c3ca;background:#475159;color:#fff}
+
+/* CROSSCUE reference finish: brushed-metal chassis, machined black separators, and physical controls. */
+.crosscue-app[data-crosscue-theme='crosscue']{background:#4a4a4d;color:#f2f2f2;background-image:linear-gradient(112deg,rgba(255,255,255,.035) 0%,rgba(255,255,255,.012) 34%,rgba(0,0,0,.045) 72%,rgba(255,255,255,.018) 100%),repeating-linear-gradient(0deg,rgba(255,255,255,.07) 0,rgba(255,255,255,.07) 1px,rgba(0,0,0,.08) 2px,rgba(0,0,0,.08) 4px)}
+.crosscue-app[data-crosscue-theme='crosscue'] .equipment-panel{border:1px solid #707074;background-color:#555558;background-image:linear-gradient(115deg,rgba(255,255,255,.07) 0%,rgba(255,255,255,.025) 38%,rgba(0,0,0,.065) 74%,rgba(255,255,255,.018) 100%),linear-gradient(180deg,rgba(255,255,255,.025),rgba(0,0,0,.04)),repeating-linear-gradient(0deg,rgba(255,255,255,.08) 0,rgba(255,255,255,.08) 1px,rgba(0,0,0,.1) 2px,rgba(0,0,0,.1) 4px);box-shadow:inset 0 1px rgba(255,255,255,.22),inset 1px 0 rgba(255,255,255,.1),inset 0 -1px rgba(20,20,22,.8),inset -1px 0 rgba(20,20,22,.42),0 2px 5px rgba(0,0,0,.65);color:#f2f2f2}
+.crosscue-app[data-crosscue-theme='crosscue'] .equipment-panel:has([data-deck-id]),.crosscue-app[data-crosscue-theme='crosscue'] [data-deck-id],.crosscue-app[data-crosscue-theme='crosscue'] [data-mixer]{border-color:#707074;background-color:#555558;background-image:linear-gradient(116deg,rgba(255,255,255,.075) 0%,rgba(255,255,255,.022) 42%,rgba(0,0,0,.07) 75%,rgba(255,255,255,.015) 100%),linear-gradient(180deg,rgba(255,255,255,.02),rgba(0,0,0,.05)),repeating-linear-gradient(0deg,rgba(255,255,255,.07) 0,rgba(255,255,255,.07) 1px,rgba(0,0,0,.1) 2px,rgba(0,0,0,.1) 4px)}
+.crosscue-app[data-crosscue-theme='crosscue'] header.equipment-panel{border-width:2px;border-color:#151718;box-shadow:inset 0 1px #e1e3e3,inset 0 -7px #161819,0 2px 6px rgba(0,0,0,.75)}
+.crosscue-app[data-crosscue-theme='crosscue'] .metal-button,.crosscue-app[data-crosscue-theme='crosscue'] .mini-button{border-color:#050606;background:#202324;color:#e4e3d9;box-shadow:inset 0 1px rgba(255,255,255,.18),inset 0 -2px rgba(0,0,0,.8),0 1px 1px rgba(255,255,255,.6);border-radius:1px}
+.crosscue-app[data-crosscue-theme='crosscue'] .metal-button:hover,.crosscue-app[data-crosscue-theme='crosscue'] .mini-button:hover{background:#303536;color:#fff7bd}
+.crosscue-app[data-crosscue-theme='crosscue'] .deck-label,.crosscue-app[data-crosscue-theme='crosscue'] [class~='text-[#d5ad58]'],.crosscue-app[data-crosscue-theme='crosscue'] [class~='text-[#bb8d36]']{color:#f3e48a}
+.crosscue-app[data-crosscue-theme='crosscue'] [class~='text-[#a49778]']{color:#d0d0d0}.crosscue-app[data-crosscue-theme='crosscue'] [class~='text-[#e8dec5]'],.crosscue-app[data-crosscue-theme='crosscue'] [class~='text-[#f1e5cc]']{color:#f2f2f2}
+.crosscue-app[data-crosscue-theme='crosscue'] .source-input,.crosscue-app[data-crosscue-theme='crosscue'] .library-search{border-color:#111314;background:#16191a;color:#eae9df;box-shadow:inset 0 1px 2px #000}
+.crosscue-app[data-crosscue-theme='crosscue'] .waveform-viewport{border:2px solid #111314;background:#0b0d0e;box-shadow:inset 0 0 0 1px #5e6363}.crosscue-app[data-crosscue-theme='crosscue'] .waveform-viewport canvas{filter:contrast(1.15) saturate(.7)}.crosscue-app[data-crosscue-theme='crosscue'] .waveform-viewport::before{background:radial-gradient(ellipse 26% 62% at 50% 50%,rgba(255,242,168,.11) 0%,rgba(255,242,168,.04) 38%,transparent 100%)}
+.crosscue-app[data-crosscue-theme='crosscue'] .platter-viewport{filter:drop-shadow(2px 3px 2px rgba(0,0,0,.55))}.crosscue-app[data-crosscue-theme='crosscue'] .platter{border-color:#0a0b0b;background-color:#0b0c0c;background-image:repeating-radial-gradient(circle,#1b1d1d 0,#1b1d1d 2px,#060707 3px,#101111 6px);box-shadow:inset 0 0 0 2px #555a59,inset 0 0 0 5px #101111,0 5px 10px rgba(0,0,0,.8)}
+.crosscue-app[data-crosscue-theme='crosscue'] .record-label{height:3.9rem;width:3.9rem;border-color:#ced0cb;background:#151718;color:#f1efdf;box-shadow:inset 0 0 0 5px #2b2e2e}.crosscue-app[data-crosscue-theme='crosscue'] .platter.vinyl-on{border-color:#e6d66e}
+.crosscue-app[data-crosscue-theme='crosscue'] .vertical-slider,.crosscue-app[data-crosscue-theme='crosscue'] .channel-fader,.crosscue-app[data-crosscue-theme='crosscue'] .crossfader{accent-color:#ecdb72}.crosscue-app[data-crosscue-theme='crosscue'] .channel-fader{filter:drop-shadow(1px 1px 0 #000)}
+.crosscue-app[data-crosscue-theme='crosscue'] .vu-meter{border:3px solid #121415;background:#777d7e;box-shadow:inset 0 0 0 2px #d0d2cf,inset 0 0 14px rgba(0,0,0,.42),0 2px 4px #333}.crosscue-app[data-crosscue-theme='crosscue'] .vu-face{fill:#d8dcda;stroke:#424849}.crosscue-app[data-crosscue-theme='crosscue'] .vu-arc,.crosscue-app[data-crosscue-theme='crosscue'] .vu-minor{stroke:#17191a}.crosscue-app[data-crosscue-theme='crosscue'] .vu-label{color:#17191a}.crosscue-app[data-crosscue-theme='crosscue'] .vu-db{color:#61520a}
+.crosscue-app[data-crosscue-theme='crosscue'] .library-panel{border-color:#707074;background-color:#555558;background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.07) 0,rgba(255,255,255,.07) 1px,rgba(0,0,0,.1) 2px,rgba(0,0,0,.1) 4px)}.crosscue-app[data-crosscue-theme='crosscue'] .table-head{background:#343436;color:#f2f2f2;border-bottom:2px solid #202022}.crosscue-app[data-crosscue-theme='crosscue'] .library-row{border-color:#707074;color:#f2f2f2}.crosscue-app[data-crosscue-theme='crosscue'] .library-row:hover{background:#5f5f62}.crosscue-app[data-crosscue-theme='crosscue'] .vinyl-active{border-color:#e8d970;background:#393a28;color:#fff5b4}
+
+/* DECKSMITH Classic — high-contrast instrumentation only. */
+.crosscue-app[data-crosscue-theme='decksmith'] [class~='text-[#d5ad58]'],.crosscue-app[data-crosscue-theme='decksmith'] [class~='text-[#bb8d36]']{color:#ff2800}.crosscue-app[data-crosscue-theme='decksmith'] [class~='text-[#a49778]']{color:#f2d0c8}.crosscue-app[data-crosscue-theme='decksmith'] .vertical-slider,.crosscue-app[data-crosscue-theme='decksmith'] .channel-fader,.crosscue-app[data-crosscue-theme='decksmith'] .crossfader{accent-color:#ff2800}.crosscue-app[data-crosscue-theme='decksmith'] .vinyl-active{border-color:#ff2800;background:#68180e;color:#fff0da}.crosscue-app[data-crosscue-theme='decksmith'] .vu-meter svg .vu-overload,.crosscue-app[data-crosscue-theme='decksmith'] .vu-db{color:#ff2800;fill:#ff2800}
+
+/* Shared high-visibility operational instrumentation. */
+.crosscue-app[data-crosscue-theme] [class~='text-[#d5ad58]'],.crosscue-app[data-crosscue-theme] [class~='text-[#bb8d36]']{color:#ff2800}.crosscue-app[data-crosscue-theme] [class~='bg-[#d5ad58]']{background-color:#ff2800}.crosscue-app[data-crosscue-theme] input[type='range']{accent-color:#ff2800}.crosscue-app[data-crosscue-theme] input[type='range']:disabled{accent-color:#62676a}.crosscue-app[data-crosscue-theme] .vinyl-active{border-color:#ff2800;background-color:#68180e;color:#fff1ed}.crosscue-app[data-crosscue-theme='crosscue'] [class~='text-[#a49778]']{color:#d0d0d0}.crosscue-app[data-crosscue-theme='crosscue'] .vertical-slider,.crosscue-app[data-crosscue-theme='crosscue'] .channel-fader,.crosscue-app[data-crosscue-theme='crosscue'] .crossfader{accent-color:#ff2800}
+
+/* CROSSCUE control legends and numeric readouts. */
+.crosscue-app[data-crosscue-theme] button,.crosscue-app[data-crosscue-theme] label,.crosscue-app[data-crosscue-theme] input,.crosscue-app[data-crosscue-theme] select,.crosscue-app[data-crosscue-theme] [class*='text-']{color:#fff!important}
+
+/* CROSSCUE machined-metal faders. */
+.crosscue-app[data-crosscue-theme] input[type='range']{appearance:none;-webkit-appearance:none;accent-color:initial;border:0;background:transparent;cursor:pointer}
+.crosscue-app[data-crosscue-theme] input[type='range']::-webkit-slider-runnable-track{height:7px;border:1px solid #050606;border-radius:2px;background:linear-gradient(180deg,#080909 0%,#292d2e 28%,#050606 52%,#1d2021 100%);box-shadow:inset 0 1px 2px #000,0 1px rgba(255,255,255,.28)}
+.crosscue-app[data-crosscue-theme] input[type='range']::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:16px;height:24px;margin-top:-10px;border:1px solid #101212;border-radius:2px;background:linear-gradient(90deg,#34393a 0%,#e1e4e2 20%,#787e7d 42%,#f5f6f2 52%,#646a69 68%,#242828 100%);box-shadow:inset 0 1px rgba(255,255,255,.9),inset 0 -2px rgba(0,0,0,.7),0 1px 3px #000}
+.crosscue-app[data-crosscue-theme] input[type='range']::-moz-range-track{height:7px;border:1px solid #050606;border-radius:2px;background:linear-gradient(180deg,#080909 0%,#292d2e 28%,#050606 52%,#1d2021 100%);box-shadow:inset 0 1px 2px #000,0 1px rgba(255,255,255,.28)}
+.crosscue-app[data-crosscue-theme] input[type='range']::-moz-range-thumb{width:14px;height:22px;border:1px solid #101212;border-radius:2px;background:linear-gradient(90deg,#34393a 0%,#e1e4e2 20%,#787e7d 42%,#f5f6f2 52%,#646a69 68%,#242828 100%);box-shadow:inset 0 1px rgba(255,255,255,.9),inset 0 -2px rgba(0,0,0,.7),0 1px 3px #000}
+.crosscue-app[data-crosscue-theme] input[type='range'].vertical-slider,.crosscue-app[data-crosscue-theme] input[type='range'].channel-fader{width:34px;overflow:visible}
+.crosscue-app[data-crosscue-theme] input[type='range'].vertical-slider::-webkit-slider-runnable-track,.crosscue-app[data-crosscue-theme] input[type='range'].channel-fader::-webkit-slider-runnable-track{margin:0 auto}.crosscue-app[data-crosscue-theme] input[type='range'].vertical-slider::-moz-range-track,.crosscue-app[data-crosscue-theme] input[type='range'].channel-fader::-moz-range-track{margin:0 auto}
+.crosscue-app[data-crosscue-theme] input[type='range'].vertical-slider::-webkit-slider-thumb,.crosscue-app[data-crosscue-theme] input[type='range'].channel-fader::-webkit-slider-thumb{width:32px;height:13px;margin-top:0;margin-left:-13.5px;border:1px solid #101212;border-radius:2px;background:linear-gradient(90deg,#2a2e2f 0%,#eef1ef 18%,#9ba09f 40%,#ffffff 52%,#868b8a 64%,#2a2e2f 100%);box-shadow:inset 0 1px rgba(255,255,255,.95),inset 0 -2px rgba(0,0,0,.7),0 1px 3px #000}.crosscue-app[data-crosscue-theme] input[type='range'].vertical-slider::-moz-range-thumb,.crosscue-app[data-crosscue-theme] input[type='range'].channel-fader::-moz-range-thumb{width:30px;height:11px;border:1px solid #101212;border-radius:2px;background:linear-gradient(90deg,#2a2e2f 0%,#eef1ef 18%,#9ba09f 40%,#ffffff 52%,#868b8a 64%,#2a2e2f 100%);box-shadow:inset 0 1px rgba(255,255,255,.95),inset 0 -2px rgba(0,0,0,.7),0 1px 3px #000}
+
+/* CROSSCUE transport button glow — yellow-pink activation halo. */
+.crosscue-app[data-crosscue-theme] .metal-button.deck-transport:active:not(:disabled){box-shadow:inset 0 1px rgba(255,255,255,.6),inset 0 -2px rgba(0,0,0,.75),0 0 8px rgba(255,210,80,.5)}
+.crosscue-app[data-crosscue-theme] .metal-button.deck-glow{box-shadow:inset 0 1px rgba(255,255,255,.18),inset 0 -2px rgba(0,0,0,.8),0 0 12px 1px rgba(255,128,192,.9),0 0 7px rgba(255,204,0,.75);border-color:#ff80c0}
+.crosscue-app[data-crosscue-theme] .metal-button.stop-button{min-width:3.4rem;border-color:#050606;box-shadow:inset 0 1px rgba(255,255,255,.6),inset 0 -2px rgba(0,0,0,.75),0 1px 2px #000}
+.crosscue-app[data-crosscue-theme] .metal-button.stop-button:active:not(:disabled){box-shadow:inset 0 1px rgba(255,255,255,.6),inset 0 -2px rgba(0,0,0,.75),0 0 8px rgba(255,210,80,.5)}
+.crosscue-app[data-crosscue-theme] input[type='range']:disabled{opacity:1}
+/* CROSSCUE transport buttons — shiny metallic finish, active-at-rest, PLAY LED. */
+.crosscue-app[data-crosscue-theme] .metal-button.deck-transport{position:relative;background:linear-gradient(180deg,#a8aeb2 0%,#73787c 28%,#4a4e51 52%,#6c7174 76%,#3a3d3f 100%);border-color:#050606;box-shadow:inset 0 1px rgba(255,255,255,.6),inset 0 -2px rgba(0,0,0,.75),inset 0 0 0 1px rgba(255,255,255,.06),0 1px 2px #000}
+.crosscue-app[data-crosscue-theme] .metal-button.deck-transport:hover{background:linear-gradient(180deg,#bcc2c6 0%,#83888c 28%,#5a5e61 52%,#7e8386 76%,#4a4d4f 100%)}
+.crosscue-app[data-crosscue-theme] .metal-button .play-led{position:absolute;right:.35rem;top:50%;transform:translateY(-50%);width:7px;height:7px;border-radius:50%;background:#1a1d1e;box-shadow:inset 0 0 2px #000}
+.crosscue-app[data-crosscue-theme] .metal-button .play-led.on{background:#ff80c0;box-shadow:0 0 8px 2px rgba(255,128,192,.9),0 0 4px rgba(255,204,0,.85)}
+/* CROSSCUE PLAY button — yellow halo when active. */
+.crosscue-app[data-crosscue-theme] .metal-button.play-active{box-shadow:inset 0 1px rgba(255,255,255,.6),inset 0 -2px rgba(0,0,0,.75),0 0 14px 2px rgba(255,205,80,.9),0 0 8px rgba(255,225,130,.75);border-color:#ffcc55}
+/* Compact deck VU meter sizing. */
+.vu-meter-compact{width:100%;height:auto;aspect-ratio:500/190;border-width:2px}
+.vu-meter-compact .vu-label,.vu-meter-compact .vu-db{font-size:11px;bottom:6px}
+.vu-meter-compact .vu-label{left:10px}
+.vu-meter-compact .vu-db{right:10px}
+.vu-meter-compact svg text{font-size:15px}
+/* CROSSCUE compact deck VU meter — pale yellow illumination. */
+.crosscue-app[data-crosscue-theme] .vu-meter-compact{background:#f3e6b0;box-shadow:inset 0 0 0 2px #d4af47,inset 0 0 16px rgba(255,236,150,.55),0 2px 5px #000}
+.crosscue-app[data-crosscue-theme] .vu-meter-compact .vu-face{fill:#f8eec6;stroke:#b99331}
+.crosscue-app[data-crosscue-theme] .vu-meter-compact .vu-arc,.crosscue-app[data-crosscue-theme] .vu-meter-compact .vu-minor{stroke:#7a5a1a}
+.crosscue-app[data-crosscue-theme] .vu-meter-compact .vu-label{color:#7a5a1a}
+.crosscue-app[data-crosscue-theme] .vu-meter-compact .vu-db{color:#a81e18}
+
+/* CROSSCUE tonal Bauhaus vinyl. */
+.crosscue-app[data-crosscue-theme] .platter{isolation:isolate;border-color:#16191a;background-color:#101314;background-image:repeating-radial-gradient(circle,#141718 0,#141718 1.7px,#454a49 2.2px,#111415 2.8px,#070909 4.4px);box-shadow:inset 0 0 0 2px #565c5b,inset 0 0 0 6px #111314,0 5px 10px rgba(0,0,0,.8)}
+.crosscue-app[data-crosscue-theme] .platter::before{content:'';position:absolute;z-index:1;width:57%;aspect-ratio:1;border-radius:50%;background:repeating-radial-gradient(circle,transparent 0,transparent 3px,rgba(33,35,35,.55) 3.7px,rgba(33,35,35,.55) 4.4px),conic-gradient(from -90deg,#202425 0deg 74deg,#e84728 74deg 132deg,#fb7931 132deg 192deg,#efbc50 192deg 250deg,#f1d888 250deg 304deg,#272b2b 304deg 360deg);box-shadow:0 0 0 2px #d7bd6c,0 0 0 5px #1c2020}
+.crosscue-app[data-crosscue-theme] .record-label{z-index:3;height:32%;width:32%;border-color:#e5cb79;background:#242829;color:#fff7d6;box-shadow:inset 0 0 0 7px #111415,0 0 0 4px #e9d48a,0 0 0 6px #222626}
+.crosscue-app[data-crosscue-theme] .vinyl-spiral{z-index:0;filter:drop-shadow(0 0 1px rgba(233,208,117,.24));opacity:.42}
+
+/* CROSSCUE signature mark — polished gold lettering. */
+.crosscue-app[data-crosscue-theme] header h1{background:linear-gradient(110deg,#9a6c13 0%,#fff5b8 22%,#e6bb48 42%,#fff9cf 57%,#b27a16 78%,#f6d66b 100%);-webkit-background-clip:text;background-clip:text;color:transparent!important;text-shadow:0 1px 0 #4b3510,0 0 7px rgba(255,220,104,.32)}
+.crosscue-app[data-crosscue-theme] header h1+p{color:#f4d36a!important;text-shadow:0 0 4px rgba(255,218,113,.24)}
+
+/* CROSSCUE polished gold framework. */
+.crosscue-app[data-crosscue-theme] .equipment-panel[data-deck-id],.crosscue-app[data-crosscue-theme] [data-mixer]{border-color:#d7b752;box-shadow:inset 0 1px rgba(255,247,190,.34),inset 0 0 0 1px rgba(112,76,13,.58),0 2px 6px rgba(0,0,0,.7),0 0 5px rgba(242,201,76,.14)}
+.crosscue-app[data-crosscue-theme] [data-deck-id] [class~='border-[#735928]'],.crosscue-app[data-crosscue-theme] [data-deck-id] [class~='border-[#4b4434]'],.crosscue-app[data-crosscue-theme] [data-mixer] [class~='border-[#6d6045]']{border-color:#d4af47}
+.crosscue-app[data-crosscue-theme] [data-mixer] [class~='bg-[#6d6045]']{background:linear-gradient(180deg,#8f6515,#fff0a8 45%,#a77a1a 100%);box-shadow:0 0 3px rgba(255,224,114,.28)}
+.crosscue-app[data-crosscue-theme] [data-deck-effects]{border-color:#d4af47;background:linear-gradient(90deg,rgba(184,138,31,.06),rgba(255,231,140,.04),rgba(184,138,31,.06));box-shadow:inset 0 1px rgba(255,237,158,.1)}
+.crosscue-app[data-crosscue-theme] [data-deck-effects] [class~='border-[#4b4434]']{border-color:#b99331}
+/* CROSSCUE deck info bar — distinct BPM/KEY/PITCH readout panel. */
+.deck-info-bar{border:1px solid #d4af47;background:linear-gradient(90deg,rgba(184,138,31,.2),rgba(255,231,140,.08),rgba(184,138,31,.2));border-radius:3px;padding:.35rem .4rem;margin-top:.5rem;box-shadow:inset 0 1px rgba(255,237,158,.15),0 1px 3px rgba(0,0,0,.3)}
+.crosscue-app[data-crosscue-theme='denim'] .deck-info-bar{border:1px solid #3a4a6a;background:rgba(18,26,56,.5)}
+/* Flag themes — deck info bar uses flag accent border and tinted surface */
+.crosscue-app[data-crosscue-theme^='flag-'] .deck-info-bar{border:1px solid var(--flag-border,#555);background:linear-gradient(90deg,rgba(0,0,0,.35),rgba(255,255,255,.04),rgba(0,0,0,.35));box-shadow:inset 0 1px rgba(255,255,255,.08),0 1px 3px rgba(0,0,0,.4)}
+
+/* CROSSCUE polished gold framework — library / playlist section. */
+.crosscue-app[data-crosscue-theme] .library-panel{border-color:#d7b752;box-shadow:inset 0 1px rgba(255,247,190,.34),inset 0 0 0 1px rgba(112,76,13,.58),0 2px 6px rgba(0,0,0,.7),0 0 5px rgba(242,201,76,.14)}
+.crosscue-app[data-crosscue-theme] .library-panel .table-head{border-color:#d4af47;background-image:linear-gradient(180deg,rgba(184,138,31,.18),rgba(255,231,140,.06));box-shadow:inset 0 -1px rgba(212,175,71,.5)}
+.crosscue-app[data-crosscue-theme] .library-row{border-color:rgba(212,175,71,.32)}
+.crosscue-app[data-crosscue-theme] .library-row:hover{border-color:#d4af47;background-image:linear-gradient(90deg,rgba(184,138,31,.08),rgba(255,231,140,.03))}
+.crosscue-app[data-crosscue-theme] .library-panel [class~='border-[#383429]'],.crosscue-app[data-crosscue-theme] .library-panel [class~='border-[#5f543d]'],.crosscue-app[data-crosscue-theme] .library-panel [class~='border-[#6d6045]'],.crosscue-app[data-crosscue-theme] .library-panel [class~='border-[#4b4434]']{border-color:#d4af47}
+.crosscue-app[data-crosscue-theme] .library-panel [class~='bg-[#6d6045]']{background:linear-gradient(180deg,#8f6515,#fff0a8 45%,#a77a1a 100%);box-shadow:0 0 3px rgba(255,224,114,.28)}
+.crosscue-app[data-crosscue-theme] .library-panel .library-search{border-color:#d4af47;box-shadow:inset 0 0 0 1px rgba(184,138,31,.28),0 0 4px rgba(242,201,76,.1)}
+.crosscue-app[data-crosscue-theme] .library-panel .library-search:focus{border-color:#f6d66b;box-shadow:inset 0 0 0 1px rgba(246,214,107,.5),0 0 6px rgba(246,214,107,.22)}
+
+/* DENIM — dark indigo stonewashed textile with visible twill weave threads. */
+html[data-crosscue-theme='denim'] body{background:#1a2540;color:#e8e4d8}
+.crosscue-app[data-crosscue-theme='denim']{background-color:#1a2540;color:#e8e4d8;background-image:repeating-linear-gradient(58deg,rgba(255,255,255,.06) 0,rgba(255,255,255,.06) 1px,rgba(0,0,0,.15) 1px,rgba(0,0,0,.15) 2.5px,transparent 2.5px,transparent 6px),repeating-linear-gradient(90deg,rgba(12,22,48,.22) 0,rgba(12,22,48,.22) 1px,transparent 1px,transparent 4px),radial-gradient(ellipse 65% 45% at 25% 30%,rgba(85,110,160,.15),transparent 65%),radial-gradient(ellipse 55% 55% at 75% 70%,rgba(18,32,62,.3),transparent 65%),linear-gradient(155deg,#212e4a 0%,#192238 45%,#1c2840 100%)}
+.crosscue-app[data-crosscue-theme='denim'] .equipment-panel{border:1px solid #3a4a6a;background-color:#222e4a;background-image:repeating-linear-gradient(58deg,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 1px,rgba(0,0,0,.12) 1px,rgba(0,0,0,.12) 2.5px,transparent 2.5px,transparent 6px),repeating-linear-gradient(90deg,rgba(12,22,48,.18) 0,rgba(12,22,48,.18) 1px,transparent 1px,transparent 4px),radial-gradient(ellipse at 30% 30%,rgba(80,105,155,.12),transparent 60%),linear-gradient(155deg,#26324e 0%,#1e2840 50%,#222e4a 100%);box-shadow:inset 0 1px rgba(255,255,255,.1),inset 0 -1px rgba(0,0,0,.4),0 3px 8px rgba(0,0,0,.6);color:#e8e4d8}
+.crosscue-app[data-crosscue-theme='denim'] header.equipment-panel{border-width:2px;border-color:#0a1228;box-shadow:inset 0 1px rgba(255,255,255,.12),inset 0 -4px rgba(10,18,40,.8),0 2px 6px rgba(0,0,0,.7)}
+.crosscue-app[data-crosscue-theme='denim'] .metal-button,.crosscue-app[data-crosscue-theme='denim'] .mini-button{border-color:#0a1228;background:#1a2540;color:#e8e4d8;box-shadow:inset 0 1px rgba(255,255,255,.15),inset 0 -2px rgba(0,0,0,.6),0 1px 2px #000;border-radius:1px}
+.crosscue-app[data-crosscue-theme='denim'] .metal-button:hover,.crosscue-app[data-crosscue-theme='denim'] .mini-button:hover{background:#2a3a5a;color:#f5e8a0}
+.crosscue-app[data-crosscue-theme='denim'] .deck-label{color:#e8c84a}
+.crosscue-app[data-crosscue-theme='denim'] .source-input,.crosscue-app[data-crosscue-theme='denim'] .library-search{border-color:#0a1228;background:#121a30;color:#e8e4d8;box-shadow:inset 0 1px 2px rgba(0,0,0,.5)}
+.crosscue-app[data-crosscue-theme='denim'] .waveform-viewport{border:2px solid #0a1228;background:#0a1020;box-shadow:inset 0 0 0 1px #3a4a6a}
+.crosscue-app[data-crosscue-theme='denim'] .waveform-viewport::before{background:radial-gradient(ellipse 26% 62% at 50% 50%,rgba(255,242,168,.11) 0%,rgba(255,242,168,.04) 38%,transparent 100%)}
+.crosscue-app[data-crosscue-theme='denim'] .platter-viewport{filter:drop-shadow(2px 3px 2px rgba(0,0,0,.55))}
+.crosscue-app[data-crosscue-theme='denim'] .platter{border-color:#0a0f1e;background-color:#0a0f1e;background-image:repeating-radial-gradient(circle,#141a2e 0,#141a2e 1.7px,#3a4a6a 2.2px,#0e1424 2.8px,#060a16 4.4px);box-shadow:inset 0 0 0 2px #4a5a7a,inset 0 0 0 6px #0a0f1e,0 5px 10px rgba(0,0,0,.8)}
+.crosscue-app[data-crosscue-theme='denim'] .platter.vinyl-on{border-color:#e8c84a}
+.crosscue-app[data-crosscue-theme='denim'] .record-label{border-color:#e5cb79;background:#1a2540;color:#fff7d6;box-shadow:inset 0 0 0 7px #0a0f1e,0 0 0 4px #e9d48a,0 0 0 6px #1a2540}
+.crosscue-app[data-crosscue-theme='denim'] .vu-meter{border:3px solid #0a1228;background:#c8ccd0;box-shadow:inset 0 0 0 2px #8a94a8,inset 0 0 14px rgba(10,18,40,.4),0 2px 4px #000}
+.crosscue-app[data-crosscue-theme='denim'] .vu-face{fill:#d8dce0;stroke:#3a4a6a}
+.crosscue-app[data-crosscue-theme='denim'] .vu-arc,.crosscue-app[data-crosscue-theme='denim'] .vu-minor{stroke:#1a2540}
+.crosscue-app[data-crosscue-theme='denim'] .vu-label{color:#1a2540}
+.crosscue-app[data-crosscue-theme='denim'] .vu-db{color:#a8201a}
+.crosscue-app[data-crosscue-theme='denim'] .library-panel{background-color:#222e4a;background-image:repeating-linear-gradient(58deg,rgba(255,255,255,.04) 0,rgba(255,255,255,.04) 1px,rgba(0,0,0,.1) 1px,rgba(0,0,0,.1) 2.5px,transparent 2.5px,transparent 6px),linear-gradient(155deg,#26324e 0%,#1e2840 50%,#222e4a 100%)}
+.crosscue-app[data-crosscue-theme='denim'] .table-head{background:#1a2540;color:#e8c84a;border-bottom:2px solid #3a4a6a}
+.crosscue-app[data-crosscue-theme='denim'] .library-row{border-color:#2a3a5a;color:#c8d4e8}
+.crosscue-app[data-crosscue-theme='denim'] .library-row:hover{background:#2a3a5a}
+
+/* Live demo embed — constrain CrossCue height inside the landing frame. */
+.live-demo-frame .crosscue-app{min-height:0!important;height:100%;overflow:auto}
+
+/* P2 — Docs body styling for rendered HTML content from rich text editor. */
+.docs-body p { margin-bottom: 0.75rem }
+.docs-body p:last-child { margin-bottom: 0 }
+.docs-body h2 { font-size: 1.25rem; font-weight: 700; margin-top: 1.25rem; margin-bottom: 0.5rem; color: #1c1917 }
+.docs-body h3 { font-size: 1.1rem; font-weight: 700; margin-top: 1rem; margin-bottom: 0.5rem; color: #1c1917 }
+.docs-body ul { list-style: disc; padding-left: 1.5rem; margin-bottom: 0.75rem }
+.docs-body ol { list-style: decimal; padding-left: 1.5rem; margin-bottom: 0.75rem }
+.docs-body li { margin-bottom: 0.25rem }
+.docs-body a { color: #b45309; text-decoration: underline }
+.docs-body a:hover { color: #92400e }
+.docs-body code { background: #f5f5f4; padding: 0.125rem 0.375rem; border-radius: 0.25rem; font-size: 0.875rem; font-family: ui-monospace, monospace }
+.docs-body pre { background: #f5f5f4; padding: 0.75rem; border-radius: 0.5rem; overflow-x: auto; margin-bottom: 0.75rem }
+.docs-body pre code { background: none; padding: 0 }
+.docs-body img { max-width: 100%; height: auto; border-radius: 0.5rem; margin: 0.5rem 0 }
+.docs-body blockquote { border-left: 3px solid #d6d3d1; padding-left: 1rem; color: #57534e; margin-bottom: 0.75rem }
+
+/* CROSSCUE Responsive Performance Mode — mobile/touch optimizations. */
+@media (max-width:639px){
+  .crosscue-app{padding:.5rem}
+  .crosscue-app header.equipment-panel{gap:.4rem;padding:.4rem .5rem}
+  .crosscue-app header h1{font-size:1.1rem;letter-spacing:.1em}
+  .crosscue-app header h1+p{font-size:8px}
+  .crosscue-app .equipment-panel{padding:.5rem}
+  .crosscue-app .metal-button{min-height:38px;padding:.4rem .55rem;font-size:11px;gap:.25rem}
+  .crosscue-app .mini-button{min-height:34px;padding:.3rem .4rem;font-size:10px}
+  .crosscue-app .deck-workspace{grid-template-columns:1fr;gap:.5rem}
+  .crosscue-app .platter-viewport{width:clamp(4rem,26vw,5.5rem);margin:0 auto}
+  .crosscue-app .platter{border-width:4px}
+  .crosscue-app .record-label{height:2.2rem;width:2.2rem;font-size:9px}
+  .crosscue-app [data-deck-controls]{flex-wrap:wrap;justify-content:center;gap:.35rem}
+  .crosscue-app [data-deck-bottom]{flex-wrap:wrap;justify-content:center;gap:.5rem}
+  .crosscue-app [data-deck-id]{min-height:auto}
+  .crosscue-app .vu-meter{height:110px}
+  .crosscue-app .channel-fader{height:68px}
+  .crosscue-app .precision-pitch{height:76px}
+  .crosscue-app .crossfader{margin-top:.4rem}
+  .crosscue-app .timeline-readout{font-size:13px}
+}
+/* CROSSCUE Responsive Performance Mode — landscape phone optimizations. */
+@media (min-width:640px) and (max-width:1023px){
+  .crosscue-app{padding:.4rem}
+  .crosscue-app .equipment-panel{padding:.4rem .5rem;margin-bottom:.4rem}
+  .crosscue-app header h1{font-size:1rem;letter-spacing:.08em}
+  .crosscue-app header h1+p{font-size:7px}
+  .crosscue-app .deck-workspace{grid-template-columns:minmax(0,1fr) minmax(3.5rem,5rem);gap:.5rem}
+  .crosscue-app .platter-viewport{width:100%;max-width:5rem}
+  .crosscue-app .platter{border-width:3px}
+  .crosscue-app .record-label{height:1.8rem;width:1.8rem;font-size:8px}
+  .crosscue-app .metal-button{min-height:30px;padding:.25rem .4rem;font-size:10px;gap:.15rem}
+  .crosscue-app .mini-button{min-height:26px;padding:.2rem .3rem;font-size:9px}
+  .crosscue-app .vu-meter{height:70px}
+  .crosscue-app .channel-fader{height:50px}
+  .crosscue-app .precision-pitch{height:54px}
+  .crosscue-app [data-deck-id]{min-height:auto}
+  .crosscue-app .timeline-readout{font-size:11px}
+  .crosscue-app [data-deck-controls]{flex-wrap:wrap;gap:.25rem}
+  .crosscue-app [data-deck-bottom]{flex-wrap:wrap;gap:.3rem}
+  .crosscue-app [data-mixer] h2{font-size:11px}
+  .crosscue-app [data-mixer] .text-xs{font-size:10px}
+}
+/* Admin Content Management — readable form controls */
+.admin-content input,
+.admin-content textarea,
+.admin-content select {
+  color: #1c1917 !important;
+  background-color: #ffffff !important;
+}
+
+.admin-content input::placeholder,
+.admin-content textarea::placeholder {
+  color: #a8a29e !important;
+  opacity: 1;
+}
+
+/* Quill rich-text editor */
+.admin-content .ql-editor {
+  color: #1c1917 !important;
+  background-color: #ffffff !important;
+}
+
+.admin-content .ql-editor.ql-blank::before {
+  color: #a8a29e !important;
+}
+
+.admin-content {
+  color: #1c1917;
+  --background: 0 0% 100%;
+  --foreground: 0 0% 0%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 0%;
+  --primary: 38 92% 38%;
+  --primary-foreground: 0 0% 100%;
+  --muted: 60 5% 96%;
+  --muted-foreground: 25 5% 35%;
+  --border: 20 6% 85%;
+  --destructive: 0 72% 45%;
+}
+
+.admin-content select option {
+  color: #1c1917;
+  background-color: #ffffff;
+}
+.admin-content input:disabled,
+.admin-content textarea:disabled,
+.admin-content select:disabled {
+  color: #57534e !important;
+  background-color: #f5f5f4 !important;
+  -webkit-text-fill-color: #57534e;
+  opacity: 1;
+}
+.admin-content input:read-only,
+.admin-content textarea:read-only {
+  color: #1c1917 !important;
+  background-color: #f5f5f4 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   NATIONAL FLAG THEMES — hybrid approach.
+   Panels + accents get flag colors; VU meters, platter, faders stay neutral.
+   Each country sets 5 CSS custom properties via flagThemeVars().
+   ═══════════════════════════════════════════════════════════════════ */
+.crosscue-app[data-crosscue-theme^='flag-'] {
+  background: #0a0a0a;
+  color: var(--flag-text, #f0f0f0);
+}
+.crosscue-app[data-crosscue-theme^='flag-'] .equipment-panel,
+.crosscue-app[data-crosscue-theme^='flag-'] [data-deck-id],
+.crosscue-app[data-crosscue-theme^='flag-'] [data-mixer],
+.crosscue-app[data-crosscue-theme^='flag-'] .library-panel {
+  background-color: var(--flag-surface, #2a2a2a);
+  border-color: var(--flag-border, #555);
+  color: var(--flag-text, #f0f0f0);
+  background-image: linear-gradient(115deg, rgba(255,255,255,.04) 0%, rgba(0,0,0,.06) 70%, rgba(255,255,255,.02) 100%);
+  box-shadow: inset 0 1px rgba(255,255,255,.1), inset 0 -1px rgba(0,0,0,.5), 0 2px 6px rgba(0,0,0,.6), 0 0 6px var(--flag-glow, transparent);
+}
+.crosscue-app[data-crosscue-theme^='flag-'] [data-deck-id],
+.crosscue-app[data-crosscue-theme^='flag-'] [data-mixer] {
+  border-color: var(--flag-border, #555);
+}
+/* Accent text — deck labels, gold text, headings */
+.crosscue-app[data-crosscue-theme^='flag-'] .deck-label,
+.crosscue-app[data-crosscue-theme^='flag-'] [class~='text-[#d5ad58]'],
+.crosscue-app[data-crosscue-theme^='flag-'] [class~='text-[#bb8d36]'] {
+  color: var(--flag-accent, #ccc) !important;
+}
+.crosscue-app[data-crosscue-theme^='flag-'] header h1 {
+  background: none;
+  -webkit-background-clip: initial;
+  background-clip: initial;
+  color: var(--flag-accent, #ccc) !important;
+  text-shadow: 0 0 8px var(--flag-glow, transparent);
+}
+.crosscue-app[data-crosscue-theme^='flag-'] header h1 + p {
+  color: var(--flag-text, #ccc) !important;
+  opacity: .7;
+}
+/* Buttons — flag accent borders */
+.crosscue-app[data-crosscue-theme^='flag-'] .metal-button,
+.crosscue-app[data-crosscue-theme^='flag-'] .mini-button {
+  border-color: var(--flag-border, #333);
+  background: rgba(0,0,0,.4);
+  color: var(--flag-text, #eee);
+}
+.crosscue-app[data-crosscue-theme^='flag-'] .metal-button:hover,
+.crosscue-app[data-crosscue-theme^='flag-'] .mini-button:hover {
+  border-color: var(--flag-accent, #888);
+  background: rgba(255,255,255,.08);
+}
+/* Inputs */
+.crosscue-app[data-crosscue-theme^='flag-'] .source-input,
+.crosscue-app[data-crosscue-theme^='flag-'] .library-search {
+  border-color: var(--flag-border, #333);
+  background: rgba(0,0,0,.5);
+  color: var(--flag-text, #eee);
+}
+/* Library rows */
+.crosscue-app[data-crosscue-theme^='flag-'] .library-row {
+  border-color: rgba(255,255,255,.08);
+  color: var(--flag-text, #ddd);
+}
+.crosscue-app[data-crosscue-theme^='flag-'] .library-row:hover {
+  background: rgba(255,255,255,.06);
+}
+.crosscue-app[data-crosscue-theme^='flag-'] .table-head {
+  background: rgba(0,0,0,.3);
+  color: var(--flag-accent, #aaa);
+  border-bottom-color: var(--flag-border, #333);
+}
+/* Waveform viewport */
+.crosscue-app[data-crosscue-theme^='flag-'] .waveform-viewport {
+  border-color: var(--flag-border, #222);
+  background: #060707;
+}
+/* Vinyl active state — flag accent */
+.crosscue-app[data-crosscue-theme^='flag-'] .vinyl-active {
+  border-color: var(--flag-accent, #888) !important;
+  background: rgba(255,255,255,.1) !important;
+  color: var(--flag-accent, #fff) !important;
+}
+/* NEUTRAL ELEMENTS — VU meters, platter, record label, faders keep professional look */
+.crosscue-app[data-crosscue-theme^='flag-'] .vu-meter {
+  border-color: #2a2a2a;
+  background: #c8c8c8;
+}
+.crosscue-app[data-crosscue-theme^='flag-'] .vu-face { fill: #d8d8d8; stroke: #424242; }
+.crosscue-app[data-crosscue-theme^='flag-'] .vu-arc,
+.crosscue-app[data-crosscue-theme^='flag-'] .vu-minor { stroke: #1a1a1a; }
+.crosscue-app[data-crosscue-theme^='flag-'] .vu-label { color: #1a1a1a; }
+.crosscue-app[data-crosscue-theme^='flag-'] .vu-db { color: #a81e18; }
+.crosscue-app[data-crosscue-theme^='flag-'] .platter {
+  border-color: #0a0a0a;
+  background-color: #0b0b0b;
+  background-image: repeating-radial-gradient(circle, #1a1a1a 0, #1a1a1a 2px, #050505 3px, #101010 6px);
+  box-shadow: inset 0 0 0 2px #555, inset 0 0 0 5px #101010, 0 5px 10px rgba(0,0,0,.8);
+}
+.crosscue-app[data-crosscue-theme^='flag-'] .record-label {
+  border-color: #ccc;
+  background: #151515;
+  color: #f0f0f0;
+}
+.crosscue-app[data-crosscue-theme^='flag-'] input[type='range'] { accent-color: var(--flag-accent, #888); }
+.crosscue-app[data-crosscue-theme^='flag-'] input[type='range']:disabled { accent-color: #62676a; }
+
+/* ═══════════════════════════════════════════════════════════════════
+   CUSTOM CHASSIS — user-uploaded image or custom colors on DECK PANELS ONLY.
+   Mixer and library stay in the selected theme. Applied via [data-custom-chassis].
+   ═══════════════════════════════════════════════════════════════════ */
+/* Colors mode — gradient background on deck panels */
+.crosscue-app[data-custom-chassis='colors'] [data-deck-id] {
+  background: var(--custom-chassis-bg, transparent) !important;
+  border-color: var(--custom-chassis-accent, var(--flag-border, #555)) !important;
+}
+/* Image mode — background image with dark overlay for control contrast */
+.crosscue-app[data-custom-chassis='image'] [data-deck-id] {
+  background-image: var(--custom-chassis-image, none) !important;
+  background-size: cover !important;
+  background-position: center !important;
+  position: relative;
+}
+.crosscue-app[data-custom-chassis='image'] [data-deck-id]::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,.35) 0%, rgba(0,0,0,.55) 100%);
+  pointer-events: none;
+  z-index: 0;
+  border-radius: inherit;
+}
+.crosscue-app[data-custom-chassis='image'] [data-deck-id] > * {
+  position: relative;
+  z-index: 1;
+}

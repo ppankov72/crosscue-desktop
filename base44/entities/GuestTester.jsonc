@@ -1,0 +1,80 @@
+{
+  "name": "GuestTester",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "tester_name": {
+      "type": "string"
+    },
+    "professional_role": {
+      "type": "string"
+    },
+    "invitation_source": {
+      "type": "string"
+    },
+    "campaign": {
+      "type": "string"
+    },
+    "invitation_id": {
+      "type": "string"
+    },
+    "test_started_at": {
+      "type": "string"
+    },
+    "test_completed_at": {
+      "type": "string"
+    },
+    "test_notes": {
+      "type": "string"
+    },
+    "bugs_reported_count": {
+      "type": "number",
+      "default": 0
+    },
+    "feature_requests_count": {
+      "type": "number",
+      "default": 0
+    },
+    "final_assessment": {
+      "type": "string",
+      "enum": [
+        "not_started",
+        "in_test",
+        "pass",
+        "pass_with_notes",
+        "fail"
+      ],
+      "default": "not_started"
+    }
+  },
+  "required": [
+    "user_id"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

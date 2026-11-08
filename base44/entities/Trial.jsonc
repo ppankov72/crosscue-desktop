@@ -1,0 +1,105 @@
+{
+  "name": "Trial",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "installation_id": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "active",
+        "paused",
+        "expired",
+        "blocked",
+        "shadow_blocked"
+      ],
+      "default": "active"
+    },
+    "trial_limit_seconds": {
+      "type": "number",
+      "default": 2400
+    },
+    "playback_used_seconds": {
+      "type": "number",
+      "default": 0
+    },
+    "playback_remaining_seconds": {
+      "type": "number",
+      "default": 2400
+    },
+    "activated_at": {
+      "type": "string"
+    },
+    "last_activity_at": {
+      "type": "string"
+    },
+    "last_heartbeat_at": {
+      "type": "string"
+    },
+    "expired_at": {
+      "type": "string"
+    },
+    "blocked_at": {
+      "type": "string"
+    },
+    "block_reason": {
+      "type": "string"
+    },
+    "risk_score": {
+      "type": "number",
+      "default": 0
+    },
+    "risk_level": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "critical"
+      ],
+      "default": "low"
+    },
+    "risk_signals": {
+      "type": "string"
+    },
+    "shadow_enforcement_decision": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "user_id"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

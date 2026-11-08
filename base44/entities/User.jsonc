@@ -1,0 +1,56 @@
+{
+  "properties": {
+    "role": {
+      "type": "string",
+      "description": "Base44 platform role (kept for compatibility)",
+      "enum": [
+        "admin",
+        "user"
+      ]
+    },
+    "custom_role": {
+      "type": "string",
+      "description": "CROSSCUE RBAC role",
+      "enum": [
+        "owner",
+        "super_admin",
+        "admin",
+        "moderator",
+        "support",
+        "tester",
+        "member"
+      ],
+      "default": "member"
+    },
+    "account_status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "pending",
+        "suspended",
+        "blocked",
+        "deleted"
+      ],
+      "default": "active"
+    },
+    "playback_override": {
+      "type": "boolean",
+      "default": false,
+      "description": "Explicit admin/owner playback override \u2014 separate from role"
+    },
+    "override_reason": {
+      "type": "string"
+    },
+    "override_set_by": {
+      "type": "string"
+    },
+    "override_set_at": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "role"
+  ],
+  "name": "User",
+  "type": "object"
+}

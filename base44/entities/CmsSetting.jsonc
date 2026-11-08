@@ -1,0 +1,56 @@
+{
+  "name": "CmsSetting",
+  "type": "object",
+  "properties": {
+    "key": {
+      "type": "string",
+      "description": "Setting key: navigation, footer, theme, typography"
+    },
+    "draft_value": {
+      "type": "string",
+      "description": "JSON string of the draft setting value"
+    },
+    "published_value": {
+      "type": "string",
+      "description": "JSON string of the published setting value"
+    },
+    "previous_published_value": {
+      "type": "string",
+      "description": "JSON string of the previous published value for rollback"
+    },
+    "published_at": {
+      "type": "string"
+    },
+    "modified_at": {
+      "type": "string"
+    },
+    "modified_by": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "key"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

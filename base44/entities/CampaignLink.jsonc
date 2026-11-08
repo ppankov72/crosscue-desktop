@@ -1,0 +1,70 @@
+{
+  "name": "CampaignLink",
+  "type": "object",
+  "properties": {
+    "campaign_id": {
+      "type": "string",
+      "description": "Reference to MarketingCampaign"
+    },
+    "label": {
+      "type": "string",
+      "description": "Link label for identification"
+    },
+    "destination_url": {
+      "type": "string"
+    },
+    "utm_source": {
+      "type": "string"
+    },
+    "utm_medium": {
+      "type": "string"
+    },
+    "utm_campaign": {
+      "type": "string"
+    },
+    "utm_content": {
+      "type": "string"
+    },
+    "utm_term": {
+      "type": "string"
+    },
+    "campaign_code": {
+      "type": "string",
+      "description": "Attribution code appended to URL"
+    },
+    "full_url": {
+      "type": "string",
+      "description": "Generated full tracking URL"
+    },
+    "variant": {
+      "type": "string",
+      "description": "A/B variant label"
+    }
+  },
+  "required": [
+    "campaign_id",
+    "destination_url"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
